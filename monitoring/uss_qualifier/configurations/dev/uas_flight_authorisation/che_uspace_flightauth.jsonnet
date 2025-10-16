@@ -1,0 +1,16 @@
+// This file is a top-level test configuration for che_uspace_flightauth.
+
+// Regardless of environment (which systems are tested and where they are), this baseline defines the overall behavior
+// of the test.
+local baseline = import 'che_uspace_flightauth_lib/baseline.libsonnet';
+
+// This environmental information will be provided to the underlying test baseline to form the full test configuration.
+// To test a system in a different environment with the same baseline, simply import and provide a different environment
+// configuration.
+// Note that the environment does not need to be defined in a separate file (che_uspace_flightauth_env_local.libsonnet).
+// If a particular environment specification was not going to be used to create multiple test configurations from
+// multiple test baselines, it could be defined directly in this file instead of a separate file.
+local env = import 'che_uspace_flightauth_lib/local/env_all.libsonnet';
+
+// The full test configuration is the baseline template/function applied/evaluated with our particular environment.
+baseline(env)

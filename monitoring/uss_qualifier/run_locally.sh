@@ -44,8 +44,8 @@ echo "Running configuration(s): ${CONFIG_NAME}"
 
 CONFIG_FLAG="--config ${CONFIG_NAME}"
 
-AUTH_SPEC='DummyOAuth(http://oauth.authority.localutm:8085/token,uss_qualifier)'
-AUTH_SPEC_2='DummyOAuth(http://oauth.authority.localutm:8085/token,uss_qualifier_2)'
+AUTH_SPEC='DummyOAuth(https://auth.dss.uspacekeeper.com/token,uss_qualifier)'
+AUTH_SPEC_2='DummyOAuth(https://auth.dss.uspacekeeper.com/token,uss_qualifier_2)'
 
 QUALIFIER_OPTIONS="$CONFIG_FLAG $OTHER_ARGS"
 

@@ -11,11 +11,11 @@ services:
     image: interuss/monitoring
     command: mock_uss/start.sh
     environment:
-      - MOCK_USS_AUTH_SPEC=DummyOAuth(http://oauth.authority.localutm:8085/token,uss1)
-      - MOCK_USS_DSS_URL=http://dss.uss1.localutm
+      - MOCK_USS_AUTH_SPEC=DummyOAuth(https://auth.dss.uspacekeeper.com/token,uss1)
+      - MOCK_USS_DSS_URL=https://dss.uspacekeeper.com
       - MOCK_USS_PUBLIC_KEY=/var/test-certs/auth2.pem
       - MOCK_USS_TOKEN_AUDIENCE=scdsc.uss1.localutm,localhost,host.docker.internal
-      - MOCK_USS_BASE_URL=http://scdsc.uss1.localutm
+      - MOCK_USS_BASE_URL=https://mock.dss.uspacekeeper.com/mock_uss_scdsc_a
       # TODO: remove interaction_logging once dedicated mock_uss is involved in tests
       - MOCK_USS_SERVICES=scdsc,versioning,interaction_logging,flight_planning
       - MOCK_USS_INTERACTIONS_LOG_DIR=output/scdsc_a_interaction_logs
@@ -44,7 +44,7 @@ services:
     image: interuss/monitoring
     command: mock_uss/start.sh
     environment:
-      - MOCK_USS_AUTH_SPEC=DummyOAuth(http://oauth.authority.localutm:8085/token,uss2)
+      - MOCK_USS_AUTH_SPEC=DummyOAuth(https://auth.dss.uspacekeeper.com/token,uss2)
       - MOCK_USS_DSS_URL=http://dss.uss2.localutm
       - MOCK_USS_PUBLIC_KEY=/var/test-certs/auth2.pem
       - MOCK_USS_TOKEN_AUDIENCE=scdsc.uss2.localutm,localhost,host.docker.internal
@@ -99,11 +99,11 @@ services:
     image: interuss/monitoring
     command: mock_uss/start.sh
     environment:
-      - MOCK_USS_AUTH_SPEC=DummyOAuth(http://oauth.authority.localutm:8085/token,uss1)
-      - MOCK_USS_DSS_URL=http://dss.uss1.localutm
+      - MOCK_USS_AUTH_SPEC=DummyOAuth(https://auth.dss.uspacekeeper.com/token,uss1)
+      - MOCK_USS_DSS_URL=https://dss.uspacekeeper.com
       - MOCK_USS_PUBLIC_KEY=/var/test-certs/auth2.pem
       - MOCK_USS_TOKEN_AUDIENCE=v22a.ridsp.uss1.localutm,localhost,host.docker.internal
-      - MOCK_USS_BASE_URL=http://v22a.ridsp.uss1.localutm
+      - MOCK_USS_BASE_URL=https://mock.dss.uspacekeeper.com/mock_uss_ridsp
       - MOCK_USS_SERVICES=ridsp,interaction_logging
       - MOCK_USS_INTERACTIONS_LOG_DIR=output/ridsp_interaction_logs
       - MOCK_USS_RID_VERSION=F3411-22a
@@ -131,11 +131,11 @@ services:
     image: interuss/monitoring
     command: mock_uss/start.sh
     environment:
-      - MOCK_USS_AUTH_SPEC=DummyOAuth(http://oauth.authority.localutm:8085/token,uss1)
-      - MOCK_USS_DSS_URL=http://dss.uss1.localutm
+      - MOCK_USS_AUTH_SPEC=DummyOAuth(https://auth.dss.uspacekeeper.com/token,uss1)
+      - MOCK_USS_DSS_URL=https://dss.uspacekeeper.com
       - MOCK_USS_PUBLIC_KEY=/var/test-certs/auth2.pem
       - MOCK_USS_TOKEN_AUDIENCE=v22a.riddp.uss1.localutm,localhost,host.docker.internal
-      - MOCK_USS_BASE_URL=http://v22a.riddp.uss1.localutm
+      - MOCK_USS_BASE_URL=https://mock.dss.uspacekeeper.com/mock_uss_riddp
       - MOCK_USS_SERVICES=riddp,interaction_logging
       - MOCK_USS_INTERACTIONS_LOG_DIR=output/riddp_interaction_logs
       - MOCK_USS_RID_VERSION=F3411-22a
@@ -163,7 +163,7 @@ services:
     image: interuss/monitoring
     command: mock_uss/start.sh
     environment:
-      - MOCK_USS_AUTH_SPEC=DummyOAuth(http://oauth.authority.localutm:8085/token,uss2)
+      - MOCK_USS_AUTH_SPEC=DummyOAuth(https://auth.dss.uspacekeeper.com/token,uss2)
       - MOCK_USS_DSS_URL=http://dss.uss2.localutm
       - MOCK_USS_PUBLIC_KEY=/var/test-certs/auth2.pem
       - MOCK_USS_TOKEN_AUDIENCE=v19.ridsp.uss2.localutm,localhost,host.docker.internal
@@ -195,8 +195,8 @@ services:
     image: interuss/monitoring
     command: mock_uss/start.sh
     environment:
-      - MOCK_USS_AUTH_SPEC=DummyOAuth(http://oauth.authority.localutm:8085/token,uss3)
-      - MOCK_USS_DSS_URL=http://dss.uss1.localutm
+      - MOCK_USS_AUTH_SPEC=DummyOAuth(https://auth.dss.uspacekeeper.com/token,uss3)
+      - MOCK_USS_DSS_URL=https://dss.uspacekeeper.com
       - MOCK_USS_PUBLIC_KEY=/var/test-certs/auth2.pem
       - MOCK_USS_TOKEN_AUDIENCE=v19.riddp.uss3.localutm,localhost,host.docker.internal
       - MOCK_USS_BASE_URL=http://v19.riddp.uss3.localutm
@@ -228,8 +228,8 @@ services:
     working_dir: /app/monitoring/mock_uss
     command: ./start.sh
     environment:
-      - MOCK_USS_AUTH_SPEC=DummyOAuth(http://oauth.authority.localutm:8085/token,uss4)
-      - MOCK_USS_DSS_URL=http://dss.uss1.localutm
+      - MOCK_USS_AUTH_SPEC=DummyOAuth(https://auth.dss.uspacekeeper.com/token,uss4)
+      - MOCK_USS_DSS_URL=https://dss.uspacekeeper.com
       - MOCK_USS_PUBLIC_KEY=/var/test-certs/auth2.pem
       - MOCK_USS_TOKEN_AUDIENCE=tracer.uss4.localutm,localhost,host.docker.internal
       - MOCK_USS_BASE_URL=http://tracer.uss4.localutm
@@ -265,8 +265,8 @@ services:
     image: interuss/monitoring
     command: mock_uss/start.sh
     environment:
-      - MOCK_USS_AUTH_SPEC=DummyOAuth(http://oauth.authority.localutm:8085/token,uss6)
-      - MOCK_USS_DSS_URL=http://dss.uss1.localutm
+      - MOCK_USS_AUTH_SPEC=DummyOAuth(https://auth.dss.uspacekeeper.com/token,uss6)
+      - MOCK_USS_DSS_URL=https://dss.uspacekeeper.com
       - MOCK_USS_PUBLIC_KEY=/var/test-certs/auth2.pem
       - MOCK_USS_TOKEN_AUDIENCE=scdsc.log.uss6.localutm,localhost,host.docker.internal
       - MOCK_USS_BASE_URL=http://scdsc.log.uss6.localutm
