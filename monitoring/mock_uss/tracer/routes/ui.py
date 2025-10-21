@@ -12,7 +12,7 @@ import yaml
 from implicitdict import ImplicitDict, StringBasedDateTime
 from loguru import logger
 
-from monitoring.mock_uss import webapp
+from monitoring.mock_uss.app import webapp
 from monitoring.mock_uss.tracer import context
 from monitoring.mock_uss.tracer.database import db
 from monitoring.mock_uss.tracer.kml import render_historical_kml
@@ -180,11 +180,10 @@ def tracer_kml_historical():
 
 
 def _get_validated_obs_area(observation_area_id: str) -> ObservationArea:
-    with db as tx:
-        if observation_area_id not in tx.observation_areas:
-            flask.abort(404, "Specified observation area not found")
-        area: ObservationArea = tx.observation_areas[observation_area_id]
-    return area
+    tx = db.value
+    if observation_area_id not in tx.observation_areas:
+        flask.abort(404, "Specified observation area not found")
+    return tx.observation_areas[observation_area_id]
 
 
 @webapp.route("/tracer/observation_areas/<observation_area_id>/ui", methods=["GET"])
