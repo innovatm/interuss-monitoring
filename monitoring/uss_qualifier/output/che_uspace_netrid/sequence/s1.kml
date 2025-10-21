@@ -127,12 +127,6 @@
         <Folder>
           <name>Injection</name>
         </Folder>
-        <Folder>
-          <name>Service Provider polling</name>
-        </Folder>
-        <Folder>
-          <name>Verify operator notification</name>
-        </Folder>
       </Folder>
       <Folder>
         <name/>

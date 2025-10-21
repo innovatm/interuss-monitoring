@@ -124,8 +124,11 @@
         <Folder>
           <name>Injection</name>
         </Folder>
+      </Folder>
+      <Folder>
+        <name/>
         <Folder>
-          <name>Service Provider polling</name>
+          <name>Cleanup</name>
         </Folder>
       </Folder>
     </Folder>

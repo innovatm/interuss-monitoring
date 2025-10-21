@@ -130,8 +130,8 @@
               <styleUrl>#QueryArea</styleUrl>
               <description><![CDATA[(no operational intent references found)]]></description>
               <TimeSpan>
-                <begin>2025-10-21T07:50:22.368473+00:00</begin>
-                <end>2025-10-21T09:20:23.368473+00:00</end>
+                <begin>2025-10-21T13:24:17.483011+00:00</begin>
+                <end>2025-10-21T14:54:18.483011+00:00</end>
               </TimeSpan>
               <MultiGeometry>
                 <Polygon>
@@ -198,8 +198,8 @@
               <styleUrl>#QueryArea</styleUrl>
               <description><![CDATA[(no operational intent references found)]]></description>
               <TimeSpan>
-                <begin>2025-10-21T07:52:01.023274+00:00</begin>
-                <end>2025-10-21T08:37:02.023274+00:00</end>
+                <begin>2025-10-21T13:25:47.908126+00:00</begin>
+                <end>2025-10-21T14:10:48.908126+00:00</end>
               </TimeSpan>
               <MultiGeometry>
                 <Polygon>
@@ -256,65 +256,23 @@
           <Folder>
             <name>E8: uss2_core interuss.automated_testing.flight_planning.v1.UpsertFlightPlan</name>
             <Folder>
-              <name>Activity Failed, flight NotPlanned</name>
-              <Placemark>
-                <name>Volume 0</name>
-                <styleUrl>#Planned_Nominal</styleUrl>
-                <TimeSpan>
-                  <begin>2025-10-21T07:52:01.023274+00:00</begin>
-                  <end>2025-10-21T08:37:02.023274+00:00</end>
-                </TimeSpan>
-                <MultiGeometry>
-                  <Polygon>
-                    <altitudeMode>absolute</altitudeMode>
-                    <outerBoundaryIs>
-                      <LinearRing>
-                        <coordinates>8.504900000000001,47.378,607.8310623441351 8.5051,47.37755,607.8310623441351 8.5053,47.37795,607.8310623441351 8.5051,47.3783,607.8310623441351</coordinates>
-                      </LinearRing>
-                    </outerBoundaryIs>
-                  </Polygon>
-                  <Polygon>
-                    <altitudeMode>absolute</altitudeMode>
-                    <outerBoundaryIs>
-                      <LinearRing>
-                        <coordinates>8.504900000000001,47.378,635.7310623441351 8.5051,47.37755,635.7310623441351 8.5053,47.37795,635.7310623441351 8.5051,47.3783,635.7310623441351</coordinates>
-                      </LinearRing>
-                    </outerBoundaryIs>
-                  </Polygon>
-                  <Polygon>
-                    <altitudeMode>absolute</altitudeMode>
-                    <outerBoundaryIs>
-                      <LinearRing>
-                        <coordinates>8.504900000000001,47.378,607.8310623441351 8.504900000000001,47.378,635.7310623441351 8.5051,47.37755,635.7310623441351 8.5051,47.37755,607.8310623441351</coordinates>
-                      </LinearRing>
-                    </outerBoundaryIs>
-                  </Polygon>
-                  <Polygon>
-                    <altitudeMode>absolute</altitudeMode>
-                    <outerBoundaryIs>
-                      <LinearRing>
-                        <coordinates>8.5051,47.37755,607.8310623441351 8.5051,47.37755,635.7310623441351 8.5053,47.37795,635.7310623441351 8.5053,47.37795,607.8310623441351</coordinates>
-                      </LinearRing>
-                    </outerBoundaryIs>
-                  </Polygon>
-                  <Polygon>
-                    <altitudeMode>absolute</altitudeMode>
-                    <outerBoundaryIs>
-                      <LinearRing>
-                        <coordinates>8.5053,47.37795,607.8310623441351 8.5053,47.37795,635.7310623441351 8.5051,47.3783,635.7310623441351 8.5051,47.3783,607.8310623441351</coordinates>
-                      </LinearRing>
-                    </outerBoundaryIs>
-                  </Polygon>
-                  <Polygon>
-                    <altitudeMode>absolute</altitudeMode>
-                    <outerBoundaryIs>
-                      <LinearRing>
-                        <coordinates>8.5051,47.3783,607.8310623441351 8.5051,47.3783,635.7310623441351 8.504900000000001,47.378,635.7310623441351 8.504900000000001,47.378,607.8310623441351</coordinates>
-                      </LinearRing>
-                    </outerBoundaryIs>
-                  </Polygon>
-                </MultiGeometry>
-              </Placemark>
+              <name>Error parsing response into UpsertFlightPlanResponse</name>
+              <description><![CDATA[Traceback (most recent call last):
+  File "/app/monitoring/uss_qualifier/reports/sequence_view/kml.py", line 141, in make_scenario_kml
+    kwargs["resp"] = ImplicitDict.parse(
+                     ~~~~~~~~~~~~~~~~~~^
+        event.query.response.json,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+        render_info.response_type,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/venv/lib/python3.13/site-packages/implicitdict/__init__.py", line 95, in parse
+    raise ValueError(
+        f"Expected to find dictionary data to populate {parse_type.__name__} object but instead found {type(source).__name__} type"
+    )
+ValueError: Expected to find dictionary data to populate UpsertFlightPlanResponse object but instead found NoneType type
+]]></description>
             </Folder>
           </Folder>
         </Folder>

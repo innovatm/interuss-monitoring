@@ -97,13 +97,13 @@ function(participants) {
       specification: {
         uss_identifiers: {
           uss1: {
-            astm_url_regexes: ['http://[^/]*uss1\\.localutm.*'],
+            astm_url_regexes: ['https://mock\\.dss\\.uspacekeeper\\.com.*'],
           },
           uss2: {
-            astm_url_regexes: ['http://[^/]*uss2\\.localutm.*'],
+            astm_url_regexes: ['http://host\\.docker\\.internal.*'],
           },
           uss3: {
-            astm_url_regexes: ['http://[^/]*uss3\\.localutm.*'],
+            astm_url_regexes: ['https://mock\\.dss\\.uspacekeeper\\.com.*'],
           },
         },
       },

@@ -161,7 +161,7 @@ v1:
             auth_adapter: utm_auth
           specification:
             participant_id: mock_uss
-            mock_uss_base_url: http://scdsc.log.uss6.localutm
+            mock_uss_base_url: https://mock.dss.uspacekeeper.com/mock_uss_scdsc_interaction_log
 
         # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         # ========== Environment ==========
