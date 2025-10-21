@@ -1,0 +1,20 @@
+{
+  "test_run_information": {
+    "test_run_id": "8cbd0aead5be33e0f333e8c17e4bd7b95f0dfd98f5ff14719738c46fe89b724b",
+    "start_time": "2025-10-21 08:53:10 UTC",
+    "end_time": "2025-10-21 08:53:19 UTC",
+    "baseline": "08df3602b2fb703c25c198edb7d383f598968e877e9a1dc0783b024106b9cae8",
+    "environment": "9642be6264d8468344a7d639caf2191bbc34cdd1b77b5ba8cb150ff37a89d42e"
+  },
+  "participant_verifications": {
+    "uss1": {
+      "status": "Fail",
+      "system_version": null
+    },
+    "uss2": {
+      "status": "Incomplete",
+      "system_version": null
+    }
+  },
+  "artifact_configuration": "U-Space Network Identification Service"
+}

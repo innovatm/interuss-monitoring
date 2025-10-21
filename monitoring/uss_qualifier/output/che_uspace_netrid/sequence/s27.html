@@ -1,0 +1,5782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>s27 - ASTM NetRID Service Provider notification behavior</title>
+<style>
+  body {
+    margin: 0;
+    color: #24292f;
+    background-color: #ffffff;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+    font-size: 16px;
+    line-height: 1.5;
+    word-wrap: break-word;
+  }
+  table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    width: max-content;
+    max-width: 100%;
+    overflow: auto;
+  }
+  tr {
+    border-top: 1px solid hsla(210,18%,87%,1);
+  }
+  table tr:nth-child(2n) {
+    background-color: #f6f8fa;
+  }
+  td {
+    padding: 6px 6px;
+    vertical-align: top;
+    border: 1px solid #d0d7de;
+  }
+  th {
+    padding: 6px 6px;
+    text-align: left;
+    background-color: rgb(230, 230, 230);
+    border: 1px solid #d0d7de;
+    height: 40px;
+    box-sizing: border-box;
+  }
+  a {
+    background-color: transparent;
+    color: #0969da;
+    text-decoration: none;
+  }
+  h2 {
+    margin-block-end: 0.1em;
+  }
+  p {
+    margin-top: 0.1em;
+    margin-bottom: 0.1em;
+  }
+  .header_row {
+    position: sticky;
+    top: -1px;
+    z-index: 100;
+  }
+  .sticky_cell_value {
+    position: sticky;
+    top: 40px;
+    z-index: 0;
+  }
+  .pass_result {
+    background-color: rgb(192, 255, 192);
+  }
+  .fail_result {
+    background-color: rgb(255, 192, 192);
+  }
+  .info_result {
+    background-color: rgb(255, 255, 192);
+  }
+  .not_tested {
+    background-color: rgb(192, 192, 192);
+  }
+  .skipped_explanation {
+    font-style: italic;
+  }
+  .failed_check_summary {
+    font-style: italic;
+  }
+  .minor_note {
+    font-style: italic;
+    font-size: 10px;
+  }
+</style>
+    <style>
+    ul, ul ul, ul li {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+    }
+    ul ul { padding-left: 0.3em; }
+    ul li {
+      padding-left: 14px;
+    }
+    li div {
+      display: inline;
+    }
+    .collapseable>.node_key:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    .collapsed>.node_key {
+      color: blue;
+    }
+    .node_key {
+      font-weight: bold;
+    }
+  </style>
+
+</head>
+<body>
+<div>
+    <h2><a href="https://github.com/interuss/monitoring/blob/4a99fb426fa02d871928c20ea06916c3b11fefef/monitoring/uss_qualifier/scenarios/astm/netrid/v22a/sp_notification_behavior.md">ASTM NetRID Service Provider notification behavior</a></h2>
+  <h3>scenarios.astm.netrid.v22a.ServiceProviderNotificationBehavior</h3>
+  <div id="resources_configuration_section" class="collapseable">
+    <div class="node_key" onclick="showHide(document.getElementById('resources_configuration_section'))"><h4>Resources</h4></div>
+    <div class="node_value">
+      <ul id="resource_origin_list">
+          <li><a href="https://github.com/interuss/monitoring/blob/4a99fb426fa02d871928c20ea06916c3b11fefef/monitoring/uss_qualifier/scenarios/astm/netrid/v22a/sp_notification_behavior.md#flights_data"><code>flights_data</code></a> provided by <a href="./index.html#resources-configuration">flights_data in top-level resource pool</a></li>
+          <li><a href="https://github.com/interuss/monitoring/blob/4a99fb426fa02d871928c20ea06916c3b11fefef/monitoring/uss_qualifier/scenarios/astm/netrid/v22a/sp_notification_behavior.md#service_providers"><code>service_providers</code></a> provided by <a href="./index.html#resources-configuration">service_providers in top-level resource pool</a></li>
+          <li><a href="https://github.com/interuss/monitoring/blob/4a99fb426fa02d871928c20ea06916c3b11fefef/monitoring/uss_qualifier/scenarios/astm/netrid/v22a/sp_notification_behavior.md#mock_uss"><code>mock_uss</code></a> provided by <a href="./index.html#resources-configuration">mock_uss_instance_dp in top-level resource pool</a></li>
+          <li><a href="https://github.com/interuss/monitoring/blob/4a99fb426fa02d871928c20ea06916c3b11fefef/monitoring/uss_qualifier/scenarios/astm/netrid/v22a/sp_notification_behavior.md#id_generator"><code>id_generator</code></a> provided by <a href="./index.html#resources-configuration">id_generator in top-level resource pool</a></li>
+          <li><a href="https://github.com/interuss/monitoring/blob/4a99fb426fa02d871928c20ea06916c3b11fefef/monitoring/uss_qualifier/scenarios/astm/netrid/v22a/sp_notification_behavior.md#dss_pool"><code>dss_pool</code></a> provided by <a href="./index.html#resources-configuration">netrid_dss_instances in top-level resource pool</a></li>
+      </ul>
+    </div>
+  </div>
+    <h4>
+      <a href="./s27.kml">KML visualization</a>
+    </h4>
+  <table>
+    <tr class="header_row">
+      <th>Case</th>
+      <th>Step</th>
+      <th colspan="3">Event</th>
+        <th>
+            uss1
+        </th>
+        <th>
+            uss1_dss
+        </th>
+    </tr>
+
+            <tr id="e1">
+                <td rowspan="2"><span class="sticky_cell_value">
+                    <a href="https://github.com/interuss/monitoring/blob/4a99fb426fa02d871928c20ea06916c3b11fefef/monitoring/uss_qualifier/scenarios/astm/netrid/v22a/sp_notification_behavior.md#setup-test-case">Setup</a>
+                </span></td>
+                <td rowspan="2"><span class="sticky_cell_value">
+                    <a href="https://github.com/interuss/monitoring/blob/4a99fb426fa02d871928c20ea06916c3b11fefef/monitoring/uss_qualifier/scenarios/astm/netrid/v22a/sp_notification_behavior.md#clean-workspace-test-step">Clean workspace</a>
+                </span></td>
+              <td><a href="#e1">1</a></td>
+                <td>&#x1F310;</td>
+                <td>
+                    <div id="e1query">
+      <ul>
+      <li class="collapseable">
+        <div class="node_key">GET dss.uspacekeeper.com 404</div>:
+        <div class="node_value">      <ul>
+      <li class="collapseable">
+        <div class="node_key">request</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">method</div>:
+        <div class="node_value">      GET
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">url</div>:
+        <div class="node_value">      https://dss.uspacekeeper.com/rid/v2/dss/subscriptions/0000018f-e36d-40be-8d38-beca6ca30000
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">initiated_at</div>:
+        <div class="node_value">      2025-10-16T14:43:40.746310Z
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">headers</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">User-Agent</div>:
+        <div class="node_value">      python-requests/2.32.5
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">Accept-Encoding</div>:
+        <div class="node_value">      gzip, deflate, br
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">Accept</div>:
+        <div class="node_value">      */*
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">Connection</div>:
+        <div class="node_value">      keep-alive
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">Authorization</div>:
+        <div class="node_value">      Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJkc3MudXNwYWNla2VlcGVyLmNvbSIsImV4cCI6MTc2MDYyOTMzNiwiaXNzIjoiZHVtbXkiLCJzY29wZSI6InJpZC5kaXNwbGF5X3Byb3ZpZGVyIiwic3ViIjoidXNzX3F1YWxpZmllciJ9.REDACTED
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">json</div>:
+        <div class="node_value">    None
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">body</div>:
+        <div class="node_value">    None
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">response</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">code</div>:
+        <div class="node_value">    404
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">headers</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">Content-Length</div>:
+        <div class="node_value">      115
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">Content-Type</div>:
+        <div class="node_value">      application/json; charset=utf-8
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">Date</div>:
+        <div class="node_value">      Thu, 16 Oct 2025 14:43:40 GMT
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">elapsed_s</div>:
+        <div class="node_value">    0.022876
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reported</div>:
+        <div class="node_value">      2025-10-16T14:43:40.772763Z
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">json</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">message</div>:
+        <div class="node_value">      Subscription 0000018f-e36d-40be-8d38-beca6ca30000 not found (E:b920a0b9-38b6-44c0-a279-77f0b92dcc94)
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">body</div>:
+        <div class="node_value">    None
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">query_type</div>:
+        <div class="node_value">      astm.f3411.v22a.dss.getSubscription
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">participant_id</div>:
+        <div class="node_value">      uss1_dss
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+  </div>
+
+                </td>
+                    <td></td>
+                    <td>&#x1F310;</td>
+            </tr>
+            <tr id="e2">
+              <td><a href="#e2">2</a></td>
+                <td>&#x2705;</td>
+                <td class="pass_result">
+                  Subscription can be queried by ID
+                </td>
+                    <td></td>
+                    <td class="pass_result">&#x2705;</td>
+            </tr>
+            <tr id="e3">
+                <td rowspan="4"><span class="sticky_cell_value">
+                    <a href="https://github.com/interuss/monitoring/blob/4a99fb426fa02d871928c20ea06916c3b11fefef/monitoring/uss_qualifier/scenarios/astm/netrid/v22a/sp_notification_behavior.md#service-provider-notification-behavior-test-case">Service Provider notification behavior</a>
+                </span></td>
+                <td rowspan="2"><span class="sticky_cell_value">
+                    <a href="https://github.com/interuss/monitoring/blob/4a99fb426fa02d871928c20ea06916c3b11fefef/monitoring/uss_qualifier/scenarios/astm/netrid/v22a/sp_notification_behavior.md#mock-uss-subscription-test-step">Mock USS Subscription</a>
+                </span></td>
+              <td><a href="#e3">3</a></td>
+                <td>&#x1F310;</td>
+                <td>
+                    <div id="e3query">
+      <ul>
+      <li class="collapseable">
+        <div class="node_key">PUT dss.uspacekeeper.com 200</div>:
+        <div class="node_value">      <ul>
+      <li class="collapseable">
+        <div class="node_key">request</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">method</div>:
+        <div class="node_value">      PUT
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">url</div>:
+        <div class="node_value">      https://dss.uspacekeeper.com/rid/v2/dss/subscriptions/0000018f-e36d-40be-8d38-beca6ca30000
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">initiated_at</div>:
+        <div class="node_value">      2025-10-16T14:43:40.839148Z
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">headers</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">User-Agent</div>:
+        <div class="node_value">      python-requests/2.32.5
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">Accept-Encoding</div>:
+        <div class="node_value">      gzip, deflate, br
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">Accept</div>:
+        <div class="node_value">      */*
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">Connection</div>:
+        <div class="node_value">      keep-alive
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">Content-Length</div>:
+        <div class="node_value">      704
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">Content-Type</div>:
+        <div class="node_value">      application/json
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">Authorization</div>:
+        <div class="node_value">      Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJkc3MudXNwYWNla2VlcGVyLmNvbSIsImV4cCI6MTc2MDYyOTMzNiwiaXNzIjoiZHVtbXkiLCJzY29wZSI6InJpZC5kaXNwbGF5X3Byb3ZpZGVyIiwic3ViIjoidXNzX3F1YWxpZmllciJ9.REDACTED
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">json</div>:
+        <div class="node_value">      <ul>
+      <li class="collapseable">
+        <div class="node_key">extents</div>:
+        <div class="node_value">      <ul>
+      <li class="collapseable">
+        <div class="node_key">volume</div>:
+        <div class="node_value">      <ul>
+      <li class="collapseable">
+        <div class="node_key">outline_polygon</div>:
+        <div class="node_value">      <ul>
+      <li class="collapseable">
+        <div class="node_key">vertices</div>:
+        <div class="node_value">      <ul>
+      <li class="collapseable">
+        <div class="node_key">item_1</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">lat</div>:
+        <div class="node_value">    47.36989610981006
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">lng</div>:
+        <div class="node_value">    8.487962372282103
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">item_2</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">lat</div>:
+        <div class="node_value">    47.36989610981006
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">lng</div>:
+        <div class="node_value">    8.50888532292006
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">item_3</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">lat</div>:
+        <div class="node_value">    47.37133349567566
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">lng</div>:
+        <div class="node_value">    8.50888532292006
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">item_4</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">lat</div>:
+        <div class="node_value">    47.37133349567566
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">lng</div>:
+        <div class="node_value">    8.487962372282103
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">altitude_lower</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      W84
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">units</div>:
+        <div class="node_value">      M
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">value</div>:
+        <div class="node_value">    -8000.0
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">altitude_upper</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      W84
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">units</div>:
+        <div class="node_value">      M
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">value</div>:
+        <div class="node_value">    100000.0
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">time_start</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">format</div>:
+        <div class="node_value">      RFC3339
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">value</div>:
+        <div class="node_value">      2025-10-16T14:43:40.811103Z
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">time_end</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">format</div>:
+        <div class="node_value">      RFC3339
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">value</div>:
+        <div class="node_value">      2025-10-16T15:43:40.811128Z
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">uss_base_url</div>:
+        <div class="node_value">      https://mock.dss.uspacekeeper.com/mock_uss_riddp/mock/riddp
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">request_id</div>:
+        <div class="node_value">      5d83fe79-b5b6-4827-af1f-a68b3e8b50ec
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">body</div>:
+        <div class="node_value">    None
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">response</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">code</div>:
+        <div class="node_value">    200
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">headers</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">Content-Length</div>:
+        <div class="node_value">      374
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">Content-Type</div>:
+        <div class="node_value">      application/json; charset=utf-8
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">Date</div>:
+        <div class="node_value">      Thu, 16 Oct 2025 14:43:41 GMT
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">elapsed_s</div>:
+        <div class="node_value">    0.700521
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reported</div>:
+        <div class="node_value">      2025-10-16T14:43:41.541186Z
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">json</div>:
+        <div class="node_value">      <ul>
+      <li class="collapseable">
+        <div class="node_key">service_areas</div>:
+        <div class="node_value">      <ul>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">subscription</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">id</div>:
+        <div class="node_value">      0000018f-e36d-40be-8d38-beca6ca30000
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">uss_base_url</div>:
+        <div class="node_value">      https://mock.dss.uspacekeeper.com/mock_uss_riddp/mock/riddp
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">owner</div>:
+        <div class="node_value">      uss_qualifier
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">notification_index</div>:
+        <div class="node_value">    0
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">time_end</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">value</div>:
+        <div class="node_value">      2025-10-16T15:43:40.811128Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">format</div>:
+        <div class="node_value">      RFC3339
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">time_start</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">value</div>:
+        <div class="node_value">      2025-10-16T14:43:40.811103Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">format</div>:
+        <div class="node_value">      RFC3339
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">version</div>:
+        <div class="node_value">      1grnvrcerbf88
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">body</div>:
+        <div class="node_value">    None
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">query_type</div>:
+        <div class="node_value">      astm.f3411.v22a.dss.createSubscription
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">participant_id</div>:
+        <div class="node_value">      uss1_dss
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+  </div>
+
+                </td>
+                    <td></td>
+                    <td>&#x1F310;</td>
+            </tr>
+            <tr id="e4">
+              <td><a href="#e4">4</a></td>
+                <td>&#x2705;</td>
+                <td class="pass_result">
+                  Subscription creation succeeds
+                </td>
+                    <td></td>
+                    <td class="pass_result">&#x2705;</td>
+            </tr>
+            <tr id="e5">
+                <td rowspan="2"><span class="sticky_cell_value">
+                    <a href="https://github.com/interuss/monitoring/blob/4a99fb426fa02d871928c20ea06916c3b11fefef/monitoring/uss_qualifier/scenarios/astm/netrid/v22a/sp_notification_behavior.md#injection-test-step">Injection</a>
+                </span></td>
+              <td><a href="#e5">5</a></td>
+                <td>&#x1F310;</td>
+                <td>
+                    <div id="e5query">
+      <ul>
+      <li class="collapseable">
+        <div class="node_key">PUT mock.dss.uspacekeeper.com 401</div>:
+        <div class="node_value">      <ul>
+      <li class="collapseable">
+        <div class="node_key">request</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">method</div>:
+        <div class="node_value">      PUT
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">url</div>:
+        <div class="node_value">      https://mock.dss.uspacekeeper.com/mock_uss_ridsp/ridsp/injection/tests/a68b1b82-b51c-485d-ba08-1541dea5236c
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">initiated_at</div>:
+        <div class="node_value">      2025-10-16T14:43:41.563608Z
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">headers</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">User-Agent</div>:
+        <div class="node_value">      python-requests/2.32.5
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">Accept-Encoding</div>:
+        <div class="node_value">      gzip, deflate, br
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">Accept</div>:
+        <div class="node_value">      */*
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">Connection</div>:
+        <div class="node_value">      keep-alive
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">Content-Length</div>:
+        <div class="node_value">      18315
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">Content-Type</div>:
+        <div class="node_value">      application/json
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">Authorization</div>:
+        <div class="node_value">      Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJtb2NrLmRzcy51c3BhY2VrZWVwZXIuY29tIiwiZXhwIjoxNzYwNjI5MzM1LCJpc3MiOiJkdW1teSIsInNjb3BlIjoicmlkLmluamVjdF90ZXN0X2RhdGEiLCJzdWIiOiJ1c3NfcXVhbGlmaWVyIn0.REDACTED
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">json</div>:
+        <div class="node_value">      <ul>
+      <li class="collapseable">
+        <div class="node_key">requested_flights</div>:
+        <div class="node_value">      <ul>
+      <li class="collapseable">
+        <div class="node_key">item_1</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">injection_id</div>:
+        <div class="node_value">      555d8d9a-1a3d-43f9-90c5-ef8dc06c136c
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">telemetry</div>:
+        <div class="node_value">      <ul>
+      <li class="collapseable">
+        <div class="node_key">item_1</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp</div>:
+        <div class="node_value">      2025-10-16T14:43:47.549069Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">operational_status</div>:
+        <div class="node_value">      Airborne
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">position</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">lng</div>:
+        <div class="node_value">    8.488106090860573
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">lat</div>:
+        <div class="node_value">    47.37063724619898
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">alt</div>:
+        <div class="node_value">    496.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_h</div>:
+        <div class="node_value">      HAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_v</div>:
+        <div class="node_value">      VAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">extrapolated</div>:
+        <div class="node_value">    False
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    0.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    0.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">track</div>:
+        <div class="node_value">    162.3752362098515
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed</div>:
+        <div class="node_value">    5.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp_accuracy</div>:
+        <div class="node_value">    1.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed_accuracy</div>:
+        <div class="node_value">      SA3mps
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">vertical_speed</div>:
+        <div class="node_value">    0.0
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">item_2</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp</div>:
+        <div class="node_value">      2025-10-16T14:43:48.549069Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">operational_status</div>:
+        <div class="node_value">      Airborne
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">position</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">lng</div>:
+        <div class="node_value">    8.488126171527895
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">lat</div>:
+        <div class="node_value">    47.37059443876779
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">alt</div>:
+        <div class="node_value">    496.18307267903697
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_h</div>:
+        <div class="node_value">      HAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_v</div>:
+        <div class="node_value">      VAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">extrapolated</div>:
+        <div class="node_value">    False
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    0.1830726790369681
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    0.1830726790369681
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">track</div>:
+        <div class="node_value">    187.50097320343912
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed</div>:
+        <div class="node_value">    5.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp_accuracy</div>:
+        <div class="node_value">    1.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed_accuracy</div>:
+        <div class="node_value">      SA3mps
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">vertical_speed</div>:
+        <div class="node_value">    0.18
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">item_3</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp</div>:
+        <div class="node_value">      2025-10-16T14:43:49.549069Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">operational_status</div>:
+        <div class="node_value">      Airborne
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">position</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">lng</div>:
+        <div class="node_value">    8.488117678127974
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">lat</div>:
+        <div class="node_value">    47.370550752380716
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">alt</div>:
+        <div class="node_value">    498.53226199914917
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_h</div>:
+        <div class="node_value">      HAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_v</div>:
+        <div class="node_value">      VAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">extrapolated</div>:
+        <div class="node_value">    False
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    2.5322619991491706
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    2.5322619991491706
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">track</div>:
+        <div class="node_value">    192.42362296934377
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed</div>:
+        <div class="node_value">    5.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp_accuracy</div>:
+        <div class="node_value">    1.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed_accuracy</div>:
+        <div class="node_value">      SA3mps
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">vertical_speed</div>:
+        <div class="node_value">    2.35
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">item_4</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp</div>:
+        <div class="node_value">      2025-10-16T14:43:50.549069Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">operational_status</div>:
+        <div class="node_value">      Airborne
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">position</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">lng</div>:
+        <div class="node_value">    8.488103410051705
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">lat</div>:
+        <div class="node_value">    47.37050688836104
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">alt</div>:
+        <div class="node_value">    500.40031939929486
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_h</div>:
+        <div class="node_value">      HAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_v</div>:
+        <div class="node_value">      VAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">extrapolated</div>:
+        <div class="node_value">    False
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    4.400319399294858
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    4.400319399294858
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">track</div>:
+        <div class="node_value">    200.40286640336953
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed</div>:
+        <div class="node_value">    5.61
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp_accuracy</div>:
+        <div class="node_value">    1.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed_accuracy</div>:
+        <div class="node_value">      SA3mps
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">vertical_speed</div>:
+        <div class="node_value">    1.87
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">item_5</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp</div>:
+        <div class="node_value">      2025-10-16T14:43:51.549069Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">operational_status</div>:
+        <div class="node_value">      Airborne
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">position</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">lng</div>:
+        <div class="node_value">    8.488080501861498
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">lat</div>:
+        <div class="node_value">    47.37046517716392
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">alt</div>:
+        <div class="node_value">    501.65525225916707
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_h</div>:
+        <div class="node_value">      HAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_v</div>:
+        <div class="node_value">      VAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">extrapolated</div>:
+        <div class="node_value">    False
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    5.655252259167071
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    5.655252259167071
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">track</div>:
+        <div class="node_value">    208.23182285522853
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed</div>:
+        <div class="node_value">    7.35
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp_accuracy</div>:
+        <div class="node_value">    1.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed_accuracy</div>:
+        <div class="node_value">      SA3mps
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">vertical_speed</div>:
+        <div class="node_value">    1.25
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">item_6</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp</div>:
+        <div class="node_value">      2025-10-16T14:43:52.549069Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">operational_status</div>:
+        <div class="node_value">      Airborne
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">position</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">lng</div>:
+        <div class="node_value">    8.488049130286102
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">lat</div>:
+        <div class="node_value">    47.37042560543707
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">alt</div>:
+        <div class="node_value">    502.4106030975036
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_h</div>:
+        <div class="node_value">      HAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_v</div>:
+        <div class="node_value">      VAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">extrapolated</div>:
+        <div class="node_value">    False
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    6.410603097503611
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    6.410603097503611
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">track</div>:
+        <div class="node_value">    208.81982213774143
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed</div>:
+        <div class="node_value">    8.15
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp_accuracy</div>:
+        <div class="node_value">    1.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed_accuracy</div>:
+        <div class="node_value">      SA3mps
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">vertical_speed</div>:
+        <div class="node_value">    0.76
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">item_7</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp</div>:
+        <div class="node_value">      2025-10-16T14:43:53.549069Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">operational_status</div>:
+        <div class="node_value">      Airborne
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">position</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">lng</div>:
+        <div class="node_value">    8.488013259623491
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">lat</div>:
+        <div class="node_value">    47.37038145191838
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">alt</div>:
+        <div class="node_value">    503.1337164705349
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_h</div>:
+        <div class="node_value">      HAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_v</div>:
+        <div class="node_value">      VAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">extrapolated</div>:
+        <div class="node_value">    False
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    7.133716470534921
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    7.133716470534921
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">track</div>:
+        <div class="node_value">    202.1993676258766
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed</div>:
+        <div class="node_value">    9.84
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp_accuracy</div>:
+        <div class="node_value">    1.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed_accuracy</div>:
+        <div class="node_value">      SA3mps
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">vertical_speed</div>:
+        <div class="node_value">    0.72
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">item_8</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp</div>:
+        <div class="node_value">      2025-10-16T14:43:54.549069Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">operational_status</div>:
+        <div class="node_value">      Airborne
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">position</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">lng</div>:
+        <div class="node_value">    8.487985396361207
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">lat</div>:
+        <div class="node_value">    47.37033520979453
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">alt</div>:
+        <div class="node_value">    504.077325459153
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_h</div>:
+        <div class="node_value">      HAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_v</div>:
+        <div class="node_value">      VAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">extrapolated</div>:
+        <div class="node_value">    False
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    8.077325459152974
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    8.077325459152974
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">track</div>:
+        <div class="node_value">    193.30773490939308
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed</div>:
+        <div class="node_value">    11.96
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp_accuracy</div>:
+        <div class="node_value">    1.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed_accuracy</div>:
+        <div class="node_value">      SA3mps
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">vertical_speed</div>:
+        <div class="node_value">    0.94
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">item_9</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp</div>:
+        <div class="node_value">      2025-10-16T14:43:55.549069Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">operational_status</div>:
+        <div class="node_value">      Airborne
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">position</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">lng</div>:
+        <div class="node_value">    8.487973904140395
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">lat</div>:
+        <div class="node_value">    47.3703023046547
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">alt</div>:
+        <div class="node_value">    504.909136585584
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_h</div>:
+        <div class="node_value">      HAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_v</div>:
+        <div class="node_value">      VAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">extrapolated</div>:
+        <div class="node_value">    False
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    8.909136585584008
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    8.909136585584008
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">track</div>:
+        <div class="node_value">    186.94220133247893
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed</div>:
+        <div class="node_value">    14.37
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp_accuracy</div>:
+        <div class="node_value">    1.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed_accuracy</div>:
+        <div class="node_value">      SA3mps
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">vertical_speed</div>:
+        <div class="node_value">    0.83
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">item_10</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp</div>:
+        <div class="node_value">      2025-10-16T14:43:56.549069Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">operational_status</div>:
+        <div class="node_value">      Airborne
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">position</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">lng</div>:
+        <div class="node_value">    8.487962372282103
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">lat</div>:
+        <div class="node_value">    47.37023816260832
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">alt</div>:
+        <div class="node_value">    506.62385364810143
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_h</div>:
+        <div class="node_value">      HAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_v</div>:
+        <div class="node_value">      VAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">extrapolated</div>:
+        <div class="node_value">    False
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    10.62385364810143
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    10.62385364810143
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">track</div>:
+        <div class="node_value">    171.81024867542703
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed</div>:
+        <div class="node_value">    16.74
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp_accuracy</div>:
+        <div class="node_value">    1.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed_accuracy</div>:
+        <div class="node_value">      SA3mps
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">vertical_speed</div>:
+        <div class="node_value">    1.71
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">item_11</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp</div>:
+        <div class="node_value">      2025-10-16T14:43:57.549069Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">operational_status</div>:
+        <div class="node_value">      Airborne
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">position</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">lng</div>:
+        <div class="node_value">    8.487976559973054
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">lat</div>:
+        <div class="node_value">    47.370171398603745
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">alt</div>:
+        <div class="node_value">    508.75800509123735
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_h</div>:
+        <div class="node_value">      HAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_v</div>:
+        <div class="node_value">      VAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">extrapolated</div>:
+        <div class="node_value">    False
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    12.75800509123735
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    12.75800509123735
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">track</div>:
+        <div class="node_value">    154.86309008170363
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed</div>:
+        <div class="node_value">    18.36
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp_accuracy</div>:
+        <div class="node_value">    1.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed_accuracy</div>:
+        <div class="node_value">      SA3mps
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">vertical_speed</div>:
+        <div class="node_value">    2.13
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">item_12</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp</div>:
+        <div class="node_value">      2025-10-16T14:43:58.549069Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">operational_status</div>:
+        <div class="node_value">      Airborne
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">position</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">lng</div>:
+        <div class="node_value">    8.488019499902185
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">lat</div>:
+        <div class="node_value">    47.37010942090538
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">alt</div>:
+        <div class="node_value">    511.13171827832986
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_h</div>:
+        <div class="node_value">      HAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_v</div>:
+        <div class="node_value">      VAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">extrapolated</div>:
+        <div class="node_value">    False
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    15.131718278329856
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    15.131718278329856
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">track</div>:
+        <div class="node_value">    132.98217445043147
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed</div>:
+        <div class="node_value">    23.11
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp_accuracy</div>:
+        <div class="node_value">    1.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed_accuracy</div>:
+        <div class="node_value">      SA3mps
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">vertical_speed</div>:
+        <div class="node_value">    2.37
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">item_13</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp</div>:
+        <div class="node_value">      2025-10-16T14:43:59.549069Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">operational_status</div>:
+        <div class="node_value">      Airborne
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">position</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">lng</div>:
+        <div class="node_value">    8.488089449646983
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">lat</div>:
+        <div class="node_value">    47.37006527181479
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">alt</div>:
+        <div class="node_value">    513.3848015774483
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_h</div>:
+        <div class="node_value">      HAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_v</div>:
+        <div class="node_value">      VAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">extrapolated</div>:
+        <div class="node_value">    False
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    17.384801577448343
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    17.384801577448343
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">track</div>:
+        <div class="node_value">    116.6325467769568
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed</div>:
+        <div class="node_value">    25.65
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp_accuracy</div>:
+        <div class="node_value">    1.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed_accuracy</div>:
+        <div class="node_value">      SA3mps
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">vertical_speed</div>:
+        <div class="node_value">    2.25
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">item_14</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp</div>:
+        <div class="node_value">      2025-10-16T14:44:00.549069Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">operational_status</div>:
+        <div class="node_value">      Airborne
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">position</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">lng</div>:
+        <div class="node_value">    8.48815088026746
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">lat</div>:
+        <div class="node_value">    47.37004440849303
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">alt</div>:
+        <div class="node_value">    514.9199444465004
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_h</div>:
+        <div class="node_value">      HAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_v</div>:
+        <div class="node_value">      VAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">extrapolated</div>:
+        <div class="node_value">    False
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    18.91994444650038
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    18.91994444650038
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">track</div>:
+        <div class="node_value">    123.51221393134806
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed</div>:
+        <div class="node_value">    27.84
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp_accuracy</div>:
+        <div class="node_value">    1.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed_accuracy</div>:
+        <div class="node_value">      SA3mps
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">vertical_speed</div>:
+        <div class="node_value">    1.54
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">item_15</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp</div>:
+        <div class="node_value">      2025-10-16T14:44:01.549069Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">operational_status</div>:
+        <div class="node_value">      Airborne
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">position</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">lng</div>:
+        <div class="node_value">    8.48831139751754
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">lat</div>:
+        <div class="node_value">    47.369972421106304
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">alt</div>:
+        <div class="node_value">    518.8514455015629
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_h</div>:
+        <div class="node_value">      HAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_v</div>:
+        <div class="node_value">      VAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">extrapolated</div>:
+        <div class="node_value">    False
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    22.85144550156292
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    22.85144550156292
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">track</div>:
+        <div class="node_value">    126.39759736353494
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed</div>:
+        <div class="node_value">    30.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp_accuracy</div>:
+        <div class="node_value">    1.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed_accuracy</div>:
+        <div class="node_value">      SA3mps
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">vertical_speed</div>:
+        <div class="node_value">    3.93
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">item_16</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp</div>:
+        <div class="node_value">      2025-10-16T14:44:02.549069Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">operational_status</div>:
+        <div class="node_value">      Airborne
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">position</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">lng</div>:
+        <div class="node_value">    8.4883924829112
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">lat</div>:
+        <div class="node_value">    47.3699319376166
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">alt</div>:
+        <div class="node_value">    520.6710082621752
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_h</div>:
+        <div class="node_value">      HAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_v</div>:
+        <div class="node_value">      VAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">extrapolated</div>:
+        <div class="node_value">    False
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    24.671008262175178
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    24.671008262175178
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">track</div>:
+        <div class="node_value">    127.79792720040928
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed</div>:
+        <div class="node_value">    30.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp_accuracy</div>:
+        <div class="node_value">    1.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed_accuracy</div>:
+        <div class="node_value">      SA3mps
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">vertical_speed</div>:
+        <div class="node_value">    1.82
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">item_17</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp</div>:
+        <div class="node_value">      2025-10-16T14:44:03.549069Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">operational_status</div>:
+        <div class="node_value">      Airborne
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">position</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">lng</div>:
+        <div class="node_value">    8.48846068845649
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">lat</div>:
+        <div class="node_value">    47.36989610981006
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">alt</div>:
+        <div class="node_value">    522.1109485203592
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_h</div>:
+        <div class="node_value">      HAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_v</div>:
+        <div class="node_value">      VAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">extrapolated</div>:
+        <div class="node_value">    False
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    26.110948520359216
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    26.110948520359216
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">track</div>:
+        <div class="node_value">    122.00014201767304
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed</div>:
+        <div class="node_value">    30.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp_accuracy</div>:
+        <div class="node_value">    1.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed_accuracy</div>:
+        <div class="node_value">      SA3mps
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">vertical_speed</div>:
+        <div class="node_value">    1.44
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">details_responses</div>:
+        <div class="node_value">      <ul>
+      <li class="collapseable">
+        <div class="node_key">item_1</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">effective_after</div>:
+        <div class="node_value">      2025-10-16T14:43:46.549069Z
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">details</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">id</div>:
+        <div class="node_value">      d22a1cef-a3e0-437f-92b5-44c1453f4068
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">serial_number</div>:
+        <div class="node_value">      1AKGAAN8G70R7JS
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">operation_description</div>:
+        <div class="node_value">      U-turn south of takeoff
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">operator_location</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">lat</div>:
+        <div class="node_value">    47.37085983569079
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">lng</div>:
+        <div class="node_value">    8.487908591798265
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">operator_id</div>:
+        <div class="node_value">      CHE-RP-f39mqfitkh9e5
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">uas_id</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">serial_number</div>:
+        <div class="node_value">      1AKGAAN8G70R7JS
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">registration_id</div>:
+        <div class="node_value">      
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">utm_id</div>:
+        <div class="node_value">      
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">aircraft_type</div>:
+        <div class="node_value">      Helicopter
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">raw_telemetry</div>:
+        <div class="node_value">      <ul>
+      <li class="collapseable">
+        <div class="node_key">item_1</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp</div>:
+        <div class="node_value">      2025-10-16T14:43:47.549069Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">operational_status</div>:
+        <div class="node_value">      Airborne
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">position</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">lng</div>:
+        <div class="node_value">    8.488106090860573
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">lat</div>:
+        <div class="node_value">    47.37063724619898
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">alt</div>:
+        <div class="node_value">    496.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_h</div>:
+        <div class="node_value">      HAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_v</div>:
+        <div class="node_value">      VAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">extrapolated</div>:
+        <div class="node_value">    False
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    0.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    0.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">track</div>:
+        <div class="node_value">    162.3752362098515
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed</div>:
+        <div class="node_value">    5.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp_accuracy</div>:
+        <div class="node_value">    1.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed_accuracy</div>:
+        <div class="node_value">      SA3mps
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">vertical_speed</div>:
+        <div class="node_value">    0.0
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">item_2</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp</div>:
+        <div class="node_value">      2025-10-16T14:43:48.549069Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">operational_status</div>:
+        <div class="node_value">      Airborne
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">position</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">lng</div>:
+        <div class="node_value">    8.488126171527895
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">lat</div>:
+        <div class="node_value">    47.37059443876779
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">alt</div>:
+        <div class="node_value">    496.18307267903697
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_h</div>:
+        <div class="node_value">      HAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_v</div>:
+        <div class="node_value">      VAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">extrapolated</div>:
+        <div class="node_value">    False
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    0.1830726790369681
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    0.1830726790369681
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">track</div>:
+        <div class="node_value">    187.50097320343912
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed</div>:
+        <div class="node_value">    5.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp_accuracy</div>:
+        <div class="node_value">    1.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed_accuracy</div>:
+        <div class="node_value">      SA3mps
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">vertical_speed</div>:
+        <div class="node_value">    0.18
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">item_3</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp</div>:
+        <div class="node_value">      2025-10-16T14:43:49.549069Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">operational_status</div>:
+        <div class="node_value">      Airborne
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">position</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">lng</div>:
+        <div class="node_value">    8.488117678127974
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">lat</div>:
+        <div class="node_value">    47.370550752380716
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">alt</div>:
+        <div class="node_value">    498.53226199914917
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_h</div>:
+        <div class="node_value">      HAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_v</div>:
+        <div class="node_value">      VAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">extrapolated</div>:
+        <div class="node_value">    False
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    2.5322619991491706
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    2.5322619991491706
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">track</div>:
+        <div class="node_value">    192.42362296934377
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed</div>:
+        <div class="node_value">    5.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp_accuracy</div>:
+        <div class="node_value">    1.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed_accuracy</div>:
+        <div class="node_value">      SA3mps
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">vertical_speed</div>:
+        <div class="node_value">    2.35
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">item_4</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp</div>:
+        <div class="node_value">      2025-10-16T14:43:50.549069Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">operational_status</div>:
+        <div class="node_value">      Airborne
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">position</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">lng</div>:
+        <div class="node_value">    8.488103410051705
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">lat</div>:
+        <div class="node_value">    47.37050688836104
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">alt</div>:
+        <div class="node_value">    500.40031939929486
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_h</div>:
+        <div class="node_value">      HAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_v</div>:
+        <div class="node_value">      VAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">extrapolated</div>:
+        <div class="node_value">    False
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    4.400319399294858
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    4.400319399294858
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">track</div>:
+        <div class="node_value">    200.40286640336953
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed</div>:
+        <div class="node_value">    5.61
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp_accuracy</div>:
+        <div class="node_value">    1.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed_accuracy</div>:
+        <div class="node_value">      SA3mps
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">vertical_speed</div>:
+        <div class="node_value">    1.87
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">item_5</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp</div>:
+        <div class="node_value">      2025-10-16T14:43:51.549069Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">operational_status</div>:
+        <div class="node_value">      Airborne
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">position</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">lng</div>:
+        <div class="node_value">    8.488080501861498
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">lat</div>:
+        <div class="node_value">    47.37046517716392
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">alt</div>:
+        <div class="node_value">    501.65525225916707
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_h</div>:
+        <div class="node_value">      HAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_v</div>:
+        <div class="node_value">      VAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">extrapolated</div>:
+        <div class="node_value">    False
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    5.655252259167071
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    5.655252259167071
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">track</div>:
+        <div class="node_value">    208.23182285522853
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed</div>:
+        <div class="node_value">    7.35
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp_accuracy</div>:
+        <div class="node_value">    1.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed_accuracy</div>:
+        <div class="node_value">      SA3mps
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">vertical_speed</div>:
+        <div class="node_value">    1.25
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">item_6</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp</div>:
+        <div class="node_value">      2025-10-16T14:43:52.549069Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">operational_status</div>:
+        <div class="node_value">      Airborne
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">position</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">lng</div>:
+        <div class="node_value">    8.488049130286102
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">lat</div>:
+        <div class="node_value">    47.37042560543707
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">alt</div>:
+        <div class="node_value">    502.4106030975036
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_h</div>:
+        <div class="node_value">      HAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_v</div>:
+        <div class="node_value">      VAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">extrapolated</div>:
+        <div class="node_value">    False
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    6.410603097503611
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    6.410603097503611
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">track</div>:
+        <div class="node_value">    208.81982213774143
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed</div>:
+        <div class="node_value">    8.15
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp_accuracy</div>:
+        <div class="node_value">    1.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed_accuracy</div>:
+        <div class="node_value">      SA3mps
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">vertical_speed</div>:
+        <div class="node_value">    0.76
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">item_7</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp</div>:
+        <div class="node_value">      2025-10-16T14:43:53.549069Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">operational_status</div>:
+        <div class="node_value">      Airborne
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">position</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">lng</div>:
+        <div class="node_value">    8.488013259623491
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">lat</div>:
+        <div class="node_value">    47.37038145191838
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">alt</div>:
+        <div class="node_value">    503.1337164705349
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_h</div>:
+        <div class="node_value">      HAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_v</div>:
+        <div class="node_value">      VAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">extrapolated</div>:
+        <div class="node_value">    False
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    7.133716470534921
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    7.133716470534921
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">track</div>:
+        <div class="node_value">    202.1993676258766
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed</div>:
+        <div class="node_value">    9.84
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp_accuracy</div>:
+        <div class="node_value">    1.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed_accuracy</div>:
+        <div class="node_value">      SA3mps
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">vertical_speed</div>:
+        <div class="node_value">    0.72
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">item_8</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp</div>:
+        <div class="node_value">      2025-10-16T14:43:54.549069Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">operational_status</div>:
+        <div class="node_value">      Airborne
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">position</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">lng</div>:
+        <div class="node_value">    8.487985396361207
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">lat</div>:
+        <div class="node_value">    47.37033520979453
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">alt</div>:
+        <div class="node_value">    504.077325459153
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_h</div>:
+        <div class="node_value">      HAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_v</div>:
+        <div class="node_value">      VAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">extrapolated</div>:
+        <div class="node_value">    False
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    8.077325459152974
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    8.077325459152974
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">track</div>:
+        <div class="node_value">    193.30773490939308
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed</div>:
+        <div class="node_value">    11.96
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp_accuracy</div>:
+        <div class="node_value">    1.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed_accuracy</div>:
+        <div class="node_value">      SA3mps
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">vertical_speed</div>:
+        <div class="node_value">    0.94
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">item_9</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp</div>:
+        <div class="node_value">      2025-10-16T14:43:55.549069Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">operational_status</div>:
+        <div class="node_value">      Airborne
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">position</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">lng</div>:
+        <div class="node_value">    8.487973904140395
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">lat</div>:
+        <div class="node_value">    47.3703023046547
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">alt</div>:
+        <div class="node_value">    504.909136585584
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_h</div>:
+        <div class="node_value">      HAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_v</div>:
+        <div class="node_value">      VAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">extrapolated</div>:
+        <div class="node_value">    False
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    8.909136585584008
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    8.909136585584008
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">track</div>:
+        <div class="node_value">    186.94220133247893
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed</div>:
+        <div class="node_value">    14.37
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp_accuracy</div>:
+        <div class="node_value">    1.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed_accuracy</div>:
+        <div class="node_value">      SA3mps
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">vertical_speed</div>:
+        <div class="node_value">    0.83
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">item_10</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp</div>:
+        <div class="node_value">      2025-10-16T14:43:56.549069Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">operational_status</div>:
+        <div class="node_value">      Airborne
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">position</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">lng</div>:
+        <div class="node_value">    8.487962372282103
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">lat</div>:
+        <div class="node_value">    47.37023816260832
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">alt</div>:
+        <div class="node_value">    506.62385364810143
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_h</div>:
+        <div class="node_value">      HAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_v</div>:
+        <div class="node_value">      VAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">extrapolated</div>:
+        <div class="node_value">    False
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    10.62385364810143
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    10.62385364810143
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">track</div>:
+        <div class="node_value">    171.81024867542703
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed</div>:
+        <div class="node_value">    16.74
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp_accuracy</div>:
+        <div class="node_value">    1.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed_accuracy</div>:
+        <div class="node_value">      SA3mps
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">vertical_speed</div>:
+        <div class="node_value">    1.71
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">item_11</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp</div>:
+        <div class="node_value">      2025-10-16T14:43:57.549069Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">operational_status</div>:
+        <div class="node_value">      Airborne
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">position</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">lng</div>:
+        <div class="node_value">    8.487976559973054
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">lat</div>:
+        <div class="node_value">    47.370171398603745
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">alt</div>:
+        <div class="node_value">    508.75800509123735
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_h</div>:
+        <div class="node_value">      HAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_v</div>:
+        <div class="node_value">      VAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">extrapolated</div>:
+        <div class="node_value">    False
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    12.75800509123735
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    12.75800509123735
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">track</div>:
+        <div class="node_value">    154.86309008170363
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed</div>:
+        <div class="node_value">    18.36
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp_accuracy</div>:
+        <div class="node_value">    1.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed_accuracy</div>:
+        <div class="node_value">      SA3mps
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">vertical_speed</div>:
+        <div class="node_value">    2.13
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">item_12</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp</div>:
+        <div class="node_value">      2025-10-16T14:43:58.549069Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">operational_status</div>:
+        <div class="node_value">      Airborne
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">position</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">lng</div>:
+        <div class="node_value">    8.488019499902185
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">lat</div>:
+        <div class="node_value">    47.37010942090538
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">alt</div>:
+        <div class="node_value">    511.13171827832986
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_h</div>:
+        <div class="node_value">      HAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_v</div>:
+        <div class="node_value">      VAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">extrapolated</div>:
+        <div class="node_value">    False
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    15.131718278329856
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    15.131718278329856
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">track</div>:
+        <div class="node_value">    132.98217445043147
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed</div>:
+        <div class="node_value">    23.11
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp_accuracy</div>:
+        <div class="node_value">    1.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed_accuracy</div>:
+        <div class="node_value">      SA3mps
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">vertical_speed</div>:
+        <div class="node_value">    2.37
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">item_13</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp</div>:
+        <div class="node_value">      2025-10-16T14:43:59.549069Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">operational_status</div>:
+        <div class="node_value">      Airborne
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">position</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">lng</div>:
+        <div class="node_value">    8.488089449646983
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">lat</div>:
+        <div class="node_value">    47.37006527181479
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">alt</div>:
+        <div class="node_value">    513.3848015774483
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_h</div>:
+        <div class="node_value">      HAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_v</div>:
+        <div class="node_value">      VAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">extrapolated</div>:
+        <div class="node_value">    False
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    17.384801577448343
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    17.384801577448343
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">track</div>:
+        <div class="node_value">    116.6325467769568
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed</div>:
+        <div class="node_value">    25.65
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp_accuracy</div>:
+        <div class="node_value">    1.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed_accuracy</div>:
+        <div class="node_value">      SA3mps
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">vertical_speed</div>:
+        <div class="node_value">    2.25
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">item_14</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp</div>:
+        <div class="node_value">      2025-10-16T14:44:00.549069Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">operational_status</div>:
+        <div class="node_value">      Airborne
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">position</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">lng</div>:
+        <div class="node_value">    8.48815088026746
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">lat</div>:
+        <div class="node_value">    47.37004440849303
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">alt</div>:
+        <div class="node_value">    514.9199444465004
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_h</div>:
+        <div class="node_value">      HAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_v</div>:
+        <div class="node_value">      VAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">extrapolated</div>:
+        <div class="node_value">    False
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    18.91994444650038
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    18.91994444650038
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">track</div>:
+        <div class="node_value">    123.51221393134806
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed</div>:
+        <div class="node_value">    27.84
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp_accuracy</div>:
+        <div class="node_value">    1.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed_accuracy</div>:
+        <div class="node_value">      SA3mps
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">vertical_speed</div>:
+        <div class="node_value">    1.54
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">item_15</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp</div>:
+        <div class="node_value">      2025-10-16T14:44:01.549069Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">operational_status</div>:
+        <div class="node_value">      Airborne
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">position</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">lng</div>:
+        <div class="node_value">    8.48831139751754
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">lat</div>:
+        <div class="node_value">    47.369972421106304
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">alt</div>:
+        <div class="node_value">    518.8514455015629
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_h</div>:
+        <div class="node_value">      HAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_v</div>:
+        <div class="node_value">      VAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">extrapolated</div>:
+        <div class="node_value">    False
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    22.85144550156292
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    22.85144550156292
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">track</div>:
+        <div class="node_value">    126.39759736353494
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed</div>:
+        <div class="node_value">    30.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp_accuracy</div>:
+        <div class="node_value">    1.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed_accuracy</div>:
+        <div class="node_value">      SA3mps
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">vertical_speed</div>:
+        <div class="node_value">    3.93
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">item_16</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp</div>:
+        <div class="node_value">      2025-10-16T14:44:02.549069Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">operational_status</div>:
+        <div class="node_value">      Airborne
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">position</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">lng</div>:
+        <div class="node_value">    8.4883924829112
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">lat</div>:
+        <div class="node_value">    47.3699319376166
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">alt</div>:
+        <div class="node_value">    520.6710082621752
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_h</div>:
+        <div class="node_value">      HAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_v</div>:
+        <div class="node_value">      VAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">extrapolated</div>:
+        <div class="node_value">    False
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    24.671008262175178
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    24.671008262175178
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">track</div>:
+        <div class="node_value">    127.79792720040928
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed</div>:
+        <div class="node_value">    30.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp_accuracy</div>:
+        <div class="node_value">    1.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed_accuracy</div>:
+        <div class="node_value">      SA3mps
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">vertical_speed</div>:
+        <div class="node_value">    1.82
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">item_17</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp</div>:
+        <div class="node_value">      2025-10-16T14:44:03.549069Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">operational_status</div>:
+        <div class="node_value">      Airborne
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">position</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">lng</div>:
+        <div class="node_value">    8.48846068845649
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">lat</div>:
+        <div class="node_value">    47.36989610981006
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">alt</div>:
+        <div class="node_value">    522.1109485203592
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_h</div>:
+        <div class="node_value">      HAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">accuracy_v</div>:
+        <div class="node_value">      VAUnknown
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">extrapolated</div>:
+        <div class="node_value">    False
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    26.110948520359216
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">height</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">distance</div>:
+        <div class="node_value">    26.110948520359216
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reference</div>:
+        <div class="node_value">      TakeoffLocation
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">track</div>:
+        <div class="node_value">    122.00014201767304
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed</div>:
+        <div class="node_value">    30.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">timestamp_accuracy</div>:
+        <div class="node_value">    1.0
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">speed_accuracy</div>:
+        <div class="node_value">      SA3mps
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">vertical_speed</div>:
+        <div class="node_value">    1.44
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">request_id</div>:
+        <div class="node_value">      a84a6f6d-c41d-486e-9928-57a46613412a
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">body</div>:
+        <div class="node_value">    None
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">response</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">code</div>:
+        <div class="node_value">    401
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">headers</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">Content-Length</div>:
+        <div class="node_value">      49
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">Content-Type</div>:
+        <div class="node_value">      application/json
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">Date</div>:
+        <div class="node_value">      Thu, 16 Oct 2025 14:43:41 GMT
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">Server</div>:
+        <div class="node_value">      nginx/1.25.5
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">elapsed_s</div>:
+        <div class="node_value">    0.046132
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reported</div>:
+        <div class="node_value">      2025-10-16T14:43:41.620876Z
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">json</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">message</div>:
+        <div class="node_value">      Access token signature is invalid.
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">body</div>:
+        <div class="node_value">    None
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">query_type</div>:
+        <div class="node_value">      interuss.automated_testing.rid.v1.injection.createTest
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">participant_id</div>:
+        <div class="node_value">      uss1
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+  </div>
+
+                </td>
+                    <td>&#x1F310;</td>
+                    <td></td>
+            </tr>
+            <tr id="e6">
+              <td><a href="#e6">6</a></td>
+                <td>    &#x1F6D1;
+</td>
+                <td class="    fail_result
+">
+                    <a href="https://github.com/interuss/monitoring/blob/4a99fb426fa02d871928c20ea06916c3b11fefef/monitoring/uss_qualifier/scenarios/astm/netrid/v22a/fragments/flight_injection.md#successful-injection-check">Successful injection</a>
+                    <sup>[<a href="#e5">5</a>]</sup>
+                    <br>
+                    <span class="failed_check_summary">Error while trying to inject test flight</span>
+                    <br>
+                    <span class="failed_check_details">Expected response code 200 from uss1 but received 401 while trying to inject a test flight</span>
+                </td>
+                    <td class="    fail_result
+">
+                          &#x1F6D1;
+
+                    </td>
+                    <td></td>
+            </tr>
+            <tr id="e7">
+                <td rowspan="4"><span class="sticky_cell_value">
+                    <a href="#"></a>
+                </span></td>
+                <td rowspan="4"><span class="sticky_cell_value">
+                    <a href="https://github.com/interuss/monitoring/blob/4a99fb426fa02d871928c20ea06916c3b11fefef/monitoring/uss_qualifier/scenarios/astm/netrid/v22a/sp_notification_behavior.md#cleanup">Cleanup</a>
+                </span></td>
+              <td><a href="#e7">7</a></td>
+                <td>&#x1F310;</td>
+                <td>
+                    <div id="e7query">
+      <ul>
+      <li class="collapseable">
+        <div class="node_key">GET dss.uspacekeeper.com 200</div>:
+        <div class="node_value">      <ul>
+      <li class="collapseable">
+        <div class="node_key">request</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">method</div>:
+        <div class="node_value">      GET
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">url</div>:
+        <div class="node_value">      https://dss.uspacekeeper.com/rid/v2/dss/subscriptions/0000018f-e36d-40be-8d38-beca6ca30000
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">initiated_at</div>:
+        <div class="node_value">      2025-10-16T14:43:41.635576Z
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">headers</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">User-Agent</div>:
+        <div class="node_value">      python-requests/2.32.5
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">Accept-Encoding</div>:
+        <div class="node_value">      gzip, deflate, br
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">Accept</div>:
+        <div class="node_value">      */*
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">Connection</div>:
+        <div class="node_value">      keep-alive
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">Authorization</div>:
+        <div class="node_value">      Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJkc3MudXNwYWNla2VlcGVyLmNvbSIsImV4cCI6MTc2MDYyOTMzNiwiaXNzIjoiZHVtbXkiLCJzY29wZSI6InJpZC5kaXNwbGF5X3Byb3ZpZGVyIiwic3ViIjoidXNzX3F1YWxpZmllciJ9.REDACTED
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">json</div>:
+        <div class="node_value">    None
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">body</div>:
+        <div class="node_value">    None
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">response</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">code</div>:
+        <div class="node_value">    200
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">headers</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">Content-Length</div>:
+        <div class="node_value">      355
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">Content-Type</div>:
+        <div class="node_value">      application/json; charset=utf-8
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">Date</div>:
+        <div class="node_value">      Thu, 16 Oct 2025 14:43:41 GMT
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">elapsed_s</div>:
+        <div class="node_value">    0.110643
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reported</div>:
+        <div class="node_value">      2025-10-16T14:43:41.746895Z
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">json</div>:
+        <div class="node_value">      <ul>
+      <li class="collapseable">
+        <div class="node_key">subscription</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">id</div>:
+        <div class="node_value">      0000018f-e36d-40be-8d38-beca6ca30000
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">uss_base_url</div>:
+        <div class="node_value">      https://mock.dss.uspacekeeper.com/mock_uss_riddp/mock/riddp
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">owner</div>:
+        <div class="node_value">      uss_qualifier
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">notification_index</div>:
+        <div class="node_value">    0
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">time_end</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">value</div>:
+        <div class="node_value">      2025-10-16T15:43:40.811128Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">format</div>:
+        <div class="node_value">      RFC3339
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">time_start</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">value</div>:
+        <div class="node_value">      2025-10-16T14:43:40.811103Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">format</div>:
+        <div class="node_value">      RFC3339
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">version</div>:
+        <div class="node_value">      1grnvrcerbf88
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">body</div>:
+        <div class="node_value">    None
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">query_type</div>:
+        <div class="node_value">      astm.f3411.v22a.dss.getSubscription
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">participant_id</div>:
+        <div class="node_value">      uss1_dss
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+  </div>
+
+                </td>
+                    <td></td>
+                    <td>&#x1F310;</td>
+            </tr>
+            <tr id="e8">
+              <td><a href="#e8">8</a></td>
+                <td>&#x2705;</td>
+                <td class="pass_result">
+                  Subscription can be queried by ID
+                </td>
+                    <td></td>
+                    <td class="pass_result">&#x2705;</td>
+            </tr>
+            <tr id="e9">
+              <td><a href="#e9">9</a></td>
+                <td>&#x1F310;</td>
+                <td>
+                    <div id="e9query">
+      <ul>
+      <li class="collapseable">
+        <div class="node_key">DELETE dss.uspacekeeper.com 200</div>:
+        <div class="node_value">      <ul>
+      <li class="collapseable">
+        <div class="node_key">request</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">method</div>:
+        <div class="node_value">      DELETE
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">url</div>:
+        <div class="node_value">      https://dss.uspacekeeper.com/rid/v2/dss/subscriptions/0000018f-e36d-40be-8d38-beca6ca30000/1grnvrcerbf88
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">initiated_at</div>:
+        <div class="node_value">      2025-10-16T14:43:41.758968Z
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">headers</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">User-Agent</div>:
+        <div class="node_value">      python-requests/2.32.5
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">Accept-Encoding</div>:
+        <div class="node_value">      gzip, deflate, br
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">Accept</div>:
+        <div class="node_value">      */*
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">Connection</div>:
+        <div class="node_value">      keep-alive
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">Content-Length</div>:
+        <div class="node_value">      0
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">Authorization</div>:
+        <div class="node_value">      Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJkc3MudXNwYWNla2VlcGVyLmNvbSIsImV4cCI6MTc2MDYyOTMzNiwiaXNzIjoiZHVtbXkiLCJzY29wZSI6InJpZC5kaXNwbGF5X3Byb3ZpZGVyIiwic3ViIjoidXNzX3F1YWxpZmllciJ9.REDACTED
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">json</div>:
+        <div class="node_value">    None
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">body</div>:
+        <div class="node_value">    None
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">response</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">code</div>:
+        <div class="node_value">    200
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">headers</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">Content-Length</div>:
+        <div class="node_value">      355
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">Content-Type</div>:
+        <div class="node_value">      application/json; charset=utf-8
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">Date</div>:
+        <div class="node_value">      Thu, 16 Oct 2025 14:43:41 GMT
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">elapsed_s</div>:
+        <div class="node_value">    0.02581
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">reported</div>:
+        <div class="node_value">      2025-10-16T14:43:41.785492Z
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">json</div>:
+        <div class="node_value">      <ul>
+      <li class="collapseable">
+        <div class="node_key">subscription</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">id</div>:
+        <div class="node_value">      0000018f-e36d-40be-8d38-beca6ca30000
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">uss_base_url</div>:
+        <div class="node_value">      https://mock.dss.uspacekeeper.com/mock_uss_riddp/mock/riddp
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">owner</div>:
+        <div class="node_value">      uss_qualifier
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">notification_index</div>:
+        <div class="node_value">    0
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">time_end</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">value</div>:
+        <div class="node_value">      2025-10-16T15:43:40.811128Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">format</div>:
+        <div class="node_value">      RFC3339
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="collapseable">
+        <div class="node_key">time_start</div>:
+        <div class="node_value">      <ul>
+      <li class="not_collapseable">
+        <div class="node_key">value</div>:
+        <div class="node_value">      2025-10-16T14:43:40.811103Z
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">format</div>:
+        <div class="node_value">      RFC3339
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">version</div>:
+        <div class="node_value">      1grnvrcerbf88
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">body</div>:
+        <div class="node_value">    None
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">query_type</div>:
+        <div class="node_value">      astm.f3411.v22a.dss.deleteSubscription
+
+</div>
+      </li>
+      <li class="not_collapseable">
+        <div class="node_key">participant_id</div>:
+        <div class="node_value">      uss1_dss
+
+</div>
+      </li>
+  </ul>
+
+</div>
+      </li>
+  </ul>
+
+  </div>
+
+                </td>
+                    <td></td>
+                    <td>&#x1F310;</td>
+            </tr>
+            <tr id="e10">
+              <td><a href="#e10">10</a></td>
+                <td>&#x2705;</td>
+                <td class="pass_result">
+                  Subscription can be deleted
+                </td>
+                    <td></td>
+                    <td class="pass_result">&#x2705;</td>
+            </tr>
+  </table>
+</div>
+  <script>
+    function showHide(node) {
+      var value = node.querySelector(".node_value");
+      if (node.classList.contains("collapsed")) {
+        node.classList.remove("collapsed");
+        for (var i = 0; i < value.children.length; i++) {
+          value.children[i].style.display = "block";
+        }
+      } else {
+        node.classList.add("collapsed");
+        for (var i = 0; i < value.children.length; i++) {
+          value.children[i].style.display = "none";
+        }
+      }
+    }
+
+    function addShowHide(node) {
+      if (node.classList.contains("collapseable")) {
+        let key = node.querySelector(".node_key");
+        key.addEventListener("click", function () { showHide(node); });
+        let values = node.querySelector(".node_value ul");
+        if (values.children.length > 3) {
+          showHide(node);
+        }
+      }
+      for (var i = 0; i < node.children.length; i++) {
+        addShowHide(node.children[i]);
+      }
+    }
+
+      addShowHide(document.getElementById("resource_origin_list"));
+      addShowHide(document.getElementById("e1query"));
+      addShowHide(document.getElementById("e3query"));
+      addShowHide(document.getElementById("e5query"));
+      addShowHide(document.getElementById("e7query"));
+      addShowHide(document.getElementById("e9query"));
+  </script>
+
+</body>
+</html>
