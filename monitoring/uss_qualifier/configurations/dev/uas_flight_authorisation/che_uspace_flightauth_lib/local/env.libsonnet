@@ -18,7 +18,6 @@ function(participants) {
           // ASTM F3548-21 USS emulation roles
           'utm.strategic_coordination',
           'utm.availability_arbitration',
-          'utm.constraint_management',
         ],
       },
     },
@@ -121,16 +120,20 @@ function(participants) {
       },
     },
 
-    // Datastore cluster constituting the DSS Airspace Representation
     dss_datastore_cluster: {
-      resource_type: 'resources.interuss.datastore.DatastoreDBClusterResource',
+      resource_type: 'resources.interuss.datastore.datastore.DatastoreDBClusterResource',
       specification: {
         nodes: [
           {
-            participant_id: 'uss1',
-            host: 'dss.uspacekeeper.com',
-            port: 5433,
-          },
+            participant_id: dss_instance.participant_id,
+            host: datastore_node.host,
+            port: datastore_node.port,
+          }
+          for participant in participants
+          if 'dss_instances' in participant.local_env
+          for dss_instance in participant.local_env.dss_instances
+          if 'datastore_nodes' in dss_instance
+          for datastore_node in dss_instance.datastore_nodes
         ],
       },
     },

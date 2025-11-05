@@ -3,7 +3,7 @@
   participant_id: 'uss2',
 
   // Set of requirements this participant wants to satisfy
-  participant_requirements: 'Basic SCD',
+  participant_requirements: 'UAS Flight Authorisation SDD V1',
 
   // (optional) IDs of subparticipants that make up this participant
   aggregate_participant_ids: [
@@ -41,6 +41,13 @@
         participant_id: 'uss2_dss',
         base_url: 'https://dss.uspacekeeper.com',
         supports_ovn_request: true,
+        // (optional) List of datastore nodes of this DSS instance
+        datastore_nodes: [
+          {
+            host: 'ybdb.uss2.localutm',
+            port: 5433,
+          },
+        ],
       },
     ]
   }

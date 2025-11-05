@@ -38,7 +38,7 @@
         // (optional) List of datastore nodes of this DSS instance
         datastore_nodes: [
           {
-            host: 'https://ybdb.dss.uspacekeeper.com',
+            host: 'ybdb.uss2.localutm',
             port: 5433,
           },
         ],

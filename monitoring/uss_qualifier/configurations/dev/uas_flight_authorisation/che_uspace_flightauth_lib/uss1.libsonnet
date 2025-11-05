@@ -3,7 +3,7 @@
   participant_id: 'uss1',
 
   // Set of requirements this participant wants to satisfy
-  participant_requirements: 'Basic SCD',
+  participant_requirements: 'UAS Flight Authorisation SDD V1',
 
   // (optional) IDs of subparticipants that make up this participant
   aggregate_participant_ids: [
@@ -44,7 +44,14 @@
           'mock_uss',  // mock_uss uses this DSS instance; it does not provide its own instance
         ],
         base_url: 'https://dss.uspacekeeper.com',
-        supports_ovn_request: true
+        supports_ovn_request: true,
+        // (optional) List of datastore nodes of this DSS instance
+        datastore_nodes: [
+          {
+            host: 'dss.uspacekeeper.com',
+            port: 5434,
+          },
+        ],
       },
     ]
   }

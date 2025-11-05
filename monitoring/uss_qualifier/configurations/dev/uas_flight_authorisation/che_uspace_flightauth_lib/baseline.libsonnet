@@ -21,7 +21,6 @@ function(env) {
             flight_planners: 'flight_planners',
             flight_planners_to_clear: 'flight_planners',
             conflicting_flights: 'conflicting_flights',
-            priority_preemption_flights: 'conflicting_flights',
             invalid_flight_intents: 'invalid_flight_intents',
             non_conflicting_flights: 'non_conflicting_flights',
             dss: 'dss',
@@ -33,7 +32,8 @@ function(env) {
             problematically_big_area: 'problematically_big_area',
             system_identity: 'system_identity',
             dss_datastore_cluster: 'dss_datastore_cluster',
-            test_exclusions: 'test_exclusions',
+            // Uncomment for local testing
+            // test_exclusions: 'test_exclusions',
           },
         },
       },
@@ -51,6 +51,7 @@ function(env) {
         'v1.test_run.resources.resource_declarations.dss_instances',
         'v1.test_run.resources.resource_declarations.mock_uss',
         'v1.test_run.resources.resource_declarations.dss_datastore_cluster',
+        'v1.test_run.resources.resource_declarations.utm_client_identity',
         'v1.artifacts.tested_requirements[0].aggregate_participants',
         'v1.artifacts.tested_requirements[0].participant_requirements',
       ],
@@ -72,6 +73,8 @@ function(env) {
           },
 
           // Controls tests behavior
+          // Only for local testing
+          // Currently disabled in the test suite definition
           test_exclusions: {
             resource_type: 'resources.dev.TestExclusionsResource',
             specification: {
@@ -258,7 +261,7 @@ function(env) {
           system_identity: {
             resource_type: 'resources.versioning.SystemIdentityResource',
             specification: {
-              system_identity: 'us.utm_implementation',
+              system_identity: 'che.uspace_zurich',
             },
           },
         }, // resource_declarations
@@ -268,7 +271,25 @@ function(env) {
       execution: {
         // Since we expect no failed checks and want to stop execution immediately if there are any failed checks, we set
         // this parameter to true.
-        stop_fast: false,
+        stop_fast: true,
+
+        // Skip scenarios making use of the down USS mechanism because of a conflict of version between the deployed DSS and the monitoring test suite.
+        // The requirements they test are out of scope (SCD0005, SCD0010), as such it is easier to skip them.
+        // Once https://github.com/interuss/monitoring/pull/1137 is merged and the monitoring version used incorporates this fix, those scenarios can be included again.
+        skip_action_when: [{
+          is_test_scenario: {
+            types: [
+              // No uss availability
+              'scenarios.astm.utm.DownUSS',
+              'scenarios.astm.utm.DownUSSEqualPriorityNotPermitted',
+              // Higher priority not in V1
+              'scenarios.astm.utm.ConflictHigherPriority',
+              // No constraint management
+              'scenarios.astm.utm.dss.CRSimple',
+              'scenarios.astm.utm.dss.synchronization.CRSynchronization',
+            ],
+          },
+        }],
       },
     }, // test_run
 
@@ -282,10 +303,10 @@ function(env) {
       tested_requirements: [
         // Write out a human-readable reports of the F3548-21 requirements tested
         {
-          report_name: 'scd',
+          report_name: 'uas_flight_auth_v1',
           aggregate_participants: env.aggregate_participants,
           requirement_collections: {
-            'Basic SCD': {
+            'UAS Flight Authorisation SDD V1': {
               requirements: [
                 'astm.f3548.v21.GEN0100',
                 'astm.f3548.v21.GEN0105',
@@ -308,47 +329,47 @@ function(env) {
                 'astm.f3548.v21.GEN0500',
                 'astm.f3548.v21.USS0105,1',
                 'astm.f3548.v21.USS0105,3',
-                //'astm.f3548.v21.DSS0005,1',
-                //'astm.f3548.v21.DSS0005,2',
-                //'astm.f3548.v21.DSS0005,5',
-                //'astm.f3548.v21.DSS0015',
-                //'astm.f3548.v21.DSS0020',
-                //'astm.f3548.v21.DSS0100,1',
-                //'astm.f3548.v21.DSS0200',
-                //'astm.f3548.v21.DSS0205',
-                //'astm.f3548.v21.DSS0210,1a',
-                //'astm.f3548.v21.DSS0210,1b',
-                //'astm.f3548.v21.DSS0210,1c',
-                //'astm.f3548.v21.DSS0210,1d',
-                //'astm.f3548.v21.DSS0210,1e',
-                //'astm.f3548.v21.DSS0210,1f',
-                //'astm.f3548.v21.DSS0210,1g',
-                //'astm.f3548.v21.DSS0210,1h',
-                //'astm.f3548.v21.DSS0210,1i',
-                //'astm.f3548.v21.DSS0210,2a',
-                //'astm.f3548.v21.DSS0210,2b',
-                //'astm.f3548.v21.DSS0210,2c',
-                //'astm.f3548.v21.DSS0210,2d',
-                //'astm.f3548.v21.DSS0210,2e',
-                //'astm.f3548.v21.DSS0210,2f',
-                //'astm.f3548.v21.DSS0210,A2-7-2,1a',
-                //'astm.f3548.v21.DSS0210,A2-7-2,1b',
-                //'astm.f3548.v21.DSS0210,A2-7-2,1c',
-                //'astm.f3548.v21.DSS0210,A2-7-2,1d',
-                //'astm.f3548.v21.DSS0210,A2-7-2,2a',
-                //'astm.f3548.v21.DSS0210,A2-7-2,2b',
-                //'astm.f3548.v21.DSS0210,A2-7-2,3a',
-                //'astm.f3548.v21.DSS0210,A2-7-2,3b',
-                //'astm.f3548.v21.DSS0210,A2-7-2,4a',
-                //'astm.f3548.v21.DSS0210,A2-7-2,4b',
-                //'astm.f3548.v21.DSS0210,A2-7-2,4c',
-                //'astm.f3548.v21.DSS0210,A2-7-2,4d',
-                //'astm.f3548.v21.DSS0210,A2-7-2,5a',
-                //'astm.f3548.v21.DSS0210,A2-7-2,5b',
-                //'astm.f3548.v21.DSS0210,A2-7-2,5c',
-                //'astm.f3548.v21.DSS0210,A2-7-2,7',
-                //'astm.f3548.v21.DSS0215',
-                //'astm.f3548.v21.DSS0300',
+                'astm.f3548.v21.DSS0005,1',
+                'astm.f3548.v21.DSS0005,2',
+                'astm.f3548.v21.DSS0005,5',
+                'astm.f3548.v21.DSS0015',
+                'astm.f3548.v21.DSS0020',
+                'astm.f3548.v21.DSS0100,1',
+                'astm.f3548.v21.DSS0200',
+                'astm.f3548.v21.DSS0205',
+                'astm.f3548.v21.DSS0210,1a',
+                'astm.f3548.v21.DSS0210,1b',
+                'astm.f3548.v21.DSS0210,1c',
+                'astm.f3548.v21.DSS0210,1d',
+                'astm.f3548.v21.DSS0210,1e',
+                'astm.f3548.v21.DSS0210,1f',
+                'astm.f3548.v21.DSS0210,1g',
+                'astm.f3548.v21.DSS0210,1h',
+                'astm.f3548.v21.DSS0210,1i',
+                'astm.f3548.v21.DSS0210,2a',
+                'astm.f3548.v21.DSS0210,2b',
+                'astm.f3548.v21.DSS0210,2c',
+                'astm.f3548.v21.DSS0210,2d',
+                'astm.f3548.v21.DSS0210,2e',
+                'astm.f3548.v21.DSS0210,2f',
+                'astm.f3548.v21.DSS0210,A2-7-2,1a',
+                'astm.f3548.v21.DSS0210,A2-7-2,1b',
+                'astm.f3548.v21.DSS0210,A2-7-2,1c',
+                'astm.f3548.v21.DSS0210,A2-7-2,1d',
+                'astm.f3548.v21.DSS0210,A2-7-2,2a',
+                'astm.f3548.v21.DSS0210,A2-7-2,2b',
+                'astm.f3548.v21.DSS0210,A2-7-2,3a',
+                'astm.f3548.v21.DSS0210,A2-7-2,3b',
+                'astm.f3548.v21.DSS0210,A2-7-2,4a',
+                'astm.f3548.v21.DSS0210,A2-7-2,4b',
+                'astm.f3548.v21.DSS0210,A2-7-2,4c',
+                'astm.f3548.v21.DSS0210,A2-7-2,4d',
+                'astm.f3548.v21.DSS0210,A2-7-2,5a',
+                'astm.f3548.v21.DSS0210,A2-7-2,5b',
+                'astm.f3548.v21.DSS0210,A2-7-2,5c',
+                'astm.f3548.v21.DSS0210,A2-7-2,7',
+                'astm.f3548.v21.DSS0215',
+                'astm.f3548.v21.DSS0300',
                 'interuss.automated_testing.flight_planning.ClearArea',
                 'interuss.automated_testing.flight_planning.DeleteFlightSuccess',
                 'interuss.automated_testing.flight_planning.ExpectedBehavior',
@@ -414,7 +435,8 @@ function(env) {
               count: {
                 // We currently expect this amount of skipped scenarios: making it an equality
                 // to make sure this is reduced if some scenarios start to be executed
-                equal_to: 7,
+                // - explicitly skipped actions: 5
+                equal_to: 5,
               },
             },
           },
