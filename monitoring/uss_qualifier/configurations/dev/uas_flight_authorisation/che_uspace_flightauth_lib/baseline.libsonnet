@@ -21,6 +21,7 @@ function(env) {
             flight_planners: 'flight_planners',
             flight_planners_to_clear: 'flight_planners',
             conflicting_flights: 'conflicting_flights',
+            priority_preemption_flights: 'conflicting_flights',
             invalid_flight_intents: 'invalid_flight_intents',
             non_conflicting_flights: 'non_conflicting_flights',
             dss: 'dss',
