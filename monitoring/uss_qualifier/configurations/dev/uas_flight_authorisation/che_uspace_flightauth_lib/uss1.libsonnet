@@ -49,7 +49,7 @@
         datastore_nodes: [
           {
             host: 'dss.uspacekeeper.com',
-            port: 5434,
+            port: 5433,
           },
         ],
       },

@@ -272,7 +272,7 @@ function(env) {
       execution: {
         // Since we expect no failed checks and want to stop execution immediately if there are any failed checks, we set
         // this parameter to true.
-        stop_fast: true,
+        stop_fast: false,
 
         // Skip scenarios making use of the down USS mechanism because of a conflict of version between the deployed DSS and the monitoring test suite.
         // The requirements they test are out of scope (SCD0005, SCD0010), as such it is easier to skip them.
