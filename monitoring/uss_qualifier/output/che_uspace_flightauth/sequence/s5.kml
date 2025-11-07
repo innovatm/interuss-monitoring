@@ -128,7 +128,7 @@
             <Placemark>
               <name>area_of_interest</name>
               <styleUrl>#QueryArea</styleUrl>
-              <description><![CDATA[(no operational intent references found)]]></description>
+              <description><![CDATA[<ul><li>fake_uss's Accepted f8fe3e8c-1e0a-42f7-9286-0929569d4597[1]</li></ul>]]></description>
               <MultiGeometry>
                 <Polygon>
                   <altitudeMode>absolute</altitudeMode>
@@ -258,7 +258,7 @@
             <Placemark>
               <name>area_of_interest</name>
               <styleUrl>#QueryArea</styleUrl>
-              <description><![CDATA[(no operational intent references found)]]></description>
+              <description><![CDATA[<ul><li>fake_uss's Accepted f8fe3e8c-1e0a-42f7-9286-0929569d4597[1]</li></ul>]]></description>
               <MultiGeometry>
                 <Polygon>
                   <altitudeMode>absolute</altitudeMode>

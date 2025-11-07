@@ -118,20 +118,11 @@
       </PolyStyle>
     </Style>
     <Folder>
-      <name>ASTM UTM DSS: Direct datastore access</name>
+      <name>Solo happy path</name>
       <Folder>
-        <name>Setup</name>
+        <name/>
         <Folder>
-          <name>Validate nodes are reachable</name>
-        </Folder>
-      </Folder>
-      <Folder>
-        <name>Verify security interoperability</name>
-        <Folder>
-          <name>Attempt to connect in insecure mode</name>
-        </Folder>
-        <Folder>
-          <name>Attempt to connect with legacy encryption protocol</name>
+          <name>Cleanup</name>
         </Folder>
       </Folder>
     </Folder>

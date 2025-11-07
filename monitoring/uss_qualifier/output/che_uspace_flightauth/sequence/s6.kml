@@ -118,32 +118,38 @@
       </PolyStyle>
     </Style>
     <Folder>
-      <name>ASTM SCD DSS: Constraint Reference Simple</name>
+      <name>ASTM SCD DSS: USS Availability Synchronization</name>
       <Folder>
         <name>Setup</name>
         <Folder>
-          <name>Ensure clean workspace</name>
-        </Folder>
-        <Folder>
-          <name>Create a constraint reference</name>
+          <name>Ensure test USS has Unknown availability</name>
         </Folder>
       </Folder>
       <Folder>
-        <name>Deletion requires correct OVN</name>
+        <name>USS Availability synchronization</name>
         <Folder>
-          <name>Attempt deletion with missing OVN</name>
+          <name>Update USS availability on primary DSS to Normal</name>
         </Folder>
         <Folder>
-          <name>Attempt deletion with incorrect OVN</name>
+          <name>Check Normal USS availability broadcast</name>
+        </Folder>
+        <Folder>
+          <name>Update USS Availability on primary DSS to Down</name>
+        </Folder>
+        <Folder>
+          <name>Check Down USS availability broadcast</name>
+        </Folder>
+        <Folder>
+          <name>Update USS availability on primary DSS to Unknown</name>
+        </Folder>
+        <Folder>
+          <name>Check Unknown USS availability broadcast</name>
         </Folder>
       </Folder>
       <Folder>
-        <name>Mutation requires correct OVN</name>
+        <name>Unknown USS state is reported as Unknown</name>
         <Folder>
-          <name>Attempt mutation with missing OVN</name>
-        </Folder>
-        <Folder>
-          <name>Attempt mutation with incorrect OVN</name>
+          <name>Query all DSS instances with an unknown USS identifier</name>
         </Folder>
       </Folder>
       <Folder>

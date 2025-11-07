@@ -1,0 +1,20 @@
+{
+  "test_run_information": {
+    "test_run_id": "e3afffa9eb2b7b6715ee9d1af4d1f7afd367558253363dd28656e7cd8d70bfe3",
+    "start_time": "2025-11-07 08:20:58 UTC",
+    "end_time": "2025-11-07 08:23:58 UTC",
+    "baseline": "5094b6a7d12208be04031fca9ec87801607a5e5dbd1fd302d425026ef286f20f",
+    "environment": "9cdb16629bb2fafe1d974af7fe32f0ce0619b9bea27fc37a1ffa52dd75d2f416"
+  },
+  "participant_verifications": {
+    "uss1": {
+      "status": "Fail",
+      "system_version": "innovatm/monitoring/v0.0.0-844ad4c6-dirty"
+    },
+    "uss2": {
+      "status": "Fail",
+      "system_version": "1.0.0-SNAPSHOT"
+    }
+  },
+  "artifact_configuration": "uas_flight_auth_v1"
+}

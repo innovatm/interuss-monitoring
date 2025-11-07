@@ -118,7 +118,7 @@
       </PolyStyle>
     </Style>
     <Folder>
-      <name>ASTM SCD DSS: Subscription and entity deletion interaction</name>
+      <name>ASTM SCD DSS: Operational Intent Reference Key Validation</name>
       <Folder>
         <name>Setup</name>
         <Folder>
@@ -128,7 +128,7 @@
             <Placemark>
               <name>area_of_interest</name>
               <styleUrl>#QueryArea</styleUrl>
-              <description><![CDATA[(no operational intent references found)]]></description>
+              <description><![CDATA[<ul><li>fake_uss's Accepted f8fe3e8c-1e0a-42f7-9286-0929569d4597[1]</li></ul>]]></description>
               <MultiGeometry>
                 <Polygon>
                   <altitudeMode>absolute</altitudeMode>
@@ -206,26 +206,38 @@
             </Placemark>
           </Folder>
         </Folder>
+      </Folder>
+      <Folder>
+        <name>Key validation on creation</name>
         <Folder>
-          <name>Verify secondary DSS instances are clean</name>
+          <name>Create first OIR</name>
+        </Folder>
+        <Folder>
+          <name>Create second non-overlapping OIR</name>
+        </Folder>
+        <Folder>
+          <name>Attempt OIR creation overlapping with first OIR</name>
+        </Folder>
+        <Folder>
+          <name>Attempt OIR creation overlapping with second OIR</name>
+        </Folder>
+        <Folder>
+          <name>Attempt OIR creation overlapping with both OIRs</name>
+        </Folder>
+        <Folder>
+          <name>Attempt valid OIR creation overlapping with both OIRs</name>
         </Folder>
       </Folder>
       <Folder>
-        <name>Subscription deletion is reflected on all DSS instances</name>
+        <name>Key validation on mutation</name>
         <Folder>
-          <name>Create a subscription at every DSS in sequence</name>
+          <name>Attempt mutation with both OVNs missing</name>
         </Folder>
         <Folder>
-          <name>Delete a subscription at every DSS in sequence</name>
-        </Folder>
-      </Folder>
-      <Folder>
-        <name>OIR creation and modification does not trigger relevant notifications after subscription deletion</name>
-        <Folder>
-          <name>Create an OIR at every DSS in sequence</name>
+          <name>Attempt mutation with first OVN missing</name>
         </Folder>
         <Folder>
-          <name>Modify an OIR at every DSS in sequence</name>
+          <name>Attempt mutation to overlap with the first OIR</name>
         </Folder>
       </Folder>
       <Folder>
@@ -233,11 +245,11 @@
         <Folder>
           <name>Cleanup</name>
           <Folder>
-            <name>E101: uss1_dss astm.f3548.v21.dss.queryOperationalIntentReferences</name>
+            <name>E39: uss1_dss astm.f3548.v21.dss.queryOperationalIntentReferences</name>
             <Placemark>
               <name>area_of_interest</name>
               <styleUrl>#QueryArea</styleUrl>
-              <description><![CDATA[<ul><li>uss_qualifier's Accepted 00000183-e36d-40be-8d38-beca6ca30001[2]</li><li>uss_qualifier's Accepted 00000183-e36d-40be-8d38-beca6ca30000[2]</li><li>uss_qualifier's Accepted 00000183-e36d-40be-8d38-beca6ca30002[2]</li></ul>]]></description>
+              <description><![CDATA[<ul><li>uss_qualifier's Accepted 0000017f-e36d-40be-8d38-beca6ca30000[1]</li><li>uss_qualifier's Accepted 00000180-e36d-40be-8d38-beca6ca30000[1]</li><li>fake_uss's Accepted f8fe3e8c-1e0a-42f7-9286-0929569d4597[1]</li><li>uss_qualifier's Accepted 0000017e-e36d-40be-8d38-beca6ca30000[1]</li></ul>]]></description>
               <MultiGeometry>
                 <Polygon>
                   <altitudeMode>absolute</altitudeMode>

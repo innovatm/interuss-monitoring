@@ -118,23 +118,11 @@
       </PolyStyle>
     </Style>
     <Folder>
-      <name>ASTM SCD DSS: Subscription Validation</name>
+      <name>ASTM UTM DSS: Direct datastore access</name>
       <Folder>
         <name>Setup</name>
         <Folder>
-          <name>Ensure clean workspace</name>
-        </Folder>
-      </Folder>
-      <Folder>
-        <name>Subscription Validation</name>
-        <Folder>
-          <name>Subscription duration limitations</name>
-        </Folder>
-      </Folder>
-      <Folder>
-        <name/>
-        <Folder>
-          <name>Cleanup</name>
+          <name>Validate nodes are reachable</name>
         </Folder>
       </Folder>
     </Folder>
