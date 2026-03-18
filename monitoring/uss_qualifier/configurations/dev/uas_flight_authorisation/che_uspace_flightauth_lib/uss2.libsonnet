@@ -37,18 +37,18 @@
   staging_env: {
     flight_planner: {
       participant_id: 'uss2_core',
-      v1_base_url: 'https://uspace-staging.innov-atm.com/flight_planning/v1',
+      v1_base_url: 'https://staging.uspace.uspacekeeper.com/flight_planning/v1',
     },
     test_env_version_provider: {
       participant_id: 'uss2_core',
       interuss: {
-        base_url: 'https://uspace-staging.innov-atm.com/versioning',
+        base_url: 'https://staging.uspace.uspacekeeper.com/versioning',
       },
     },
     prod_env_version_provider: {
       participant_id: 'uss2_core',
       interuss: {
-        base_url: 'https://uspace-staging.innov-atm.com/versioning',
+        base_url: 'https://staging.uspace.uspacekeeper.com/versioning',
       },
     },
     dss_instances: [

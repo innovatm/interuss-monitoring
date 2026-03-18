@@ -1,4 +1,4 @@
-// Staging environment: uspace-services on uspace-staging.innov-atm.com
+// Staging environment: uspace-services on staging.uspace.uspacekeeper.com
 // Auth via InterUSS dummy OAuth server at dss.uspacekeeper.com
 //   AUTH_SPEC='DummyOAuth(https://dss.uspacekeeper.com/token,uss_qualifier)'
 function(participants) {

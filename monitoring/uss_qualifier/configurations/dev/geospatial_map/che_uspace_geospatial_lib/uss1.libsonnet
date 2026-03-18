@@ -14,7 +14,7 @@
   staging_env: {
     geospatial_info_provider: {
       participant_id: 'uspace_services',
-      geospatial_map_v1_base_url: 'https://uspace-staging.innov-atm.com/geospatial_map/v1',
+      geospatial_map_v1_base_url: 'https://staging.uspace.uspacekeeper.com/geospatial_map/v1',
     },
   },
 }

@@ -30,11 +30,11 @@
   staging_env: {
     service_provider: {
       participant_id: 'uss2',
-      injection_base_url: 'https://uspace-staging.innov-atm.com/ridsp/injection',
+      injection_base_url: 'https://staging.uspace.uspacekeeper.com/ridsp/injection',
     },
     observer: {
       participant_id: 'uss2',
-      observation_base_url: 'https://uspace-staging.innov-atm.com/riddp/observation',
+      observation_base_url: 'https://staging.uspace.uspacekeeper.com/riddp/observation',
     },
     dss_instances: [
       {

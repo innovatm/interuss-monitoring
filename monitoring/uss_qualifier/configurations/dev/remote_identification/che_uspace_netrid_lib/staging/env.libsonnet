@@ -88,7 +88,7 @@ function(participants) {
             astm_url_regexes: ['https://mock\\.dss\\.uspacekeeper\\.com.*'],
           },
           uss2: {
-            astm_url_regexes: ['https://uspace-staging\\.innov-atm\\.com.*'],
+            astm_url_regexes: ['https://staging\\.uspace\\.uspacekeeper\\.com.*'],
           },
           uss3: {
             astm_url_regexes: ['https://mock\\.dss\\.uspacekeeper\\.com.*'],
