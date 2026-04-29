@@ -1,3 +1,16 @@
+/*
+ * ******************************************************************************
+ * Copyright Innov'ATM all rights reserved. This software is the property of
+ * Innov'ATM and may not be used in any manner except under a license agreement
+ * signed with Innov'ATM.
+ * *******************************************************************************
+ */
+
+
+
+
+
+
 #!/usr/bin/env bash
 
 set -eo pipefail
@@ -72,7 +85,6 @@ fi
 # shellcheck disable=SC2086
 docker run ${docker_args} --name uss_qualifier \
   --rm \
-  --network interop_ecosystem_network \
   --add-host=host.docker.internal:host-gateway \
   -u "$(id -u):$(id -g)" \
   -e PYTHONBUFFERED=1 \
