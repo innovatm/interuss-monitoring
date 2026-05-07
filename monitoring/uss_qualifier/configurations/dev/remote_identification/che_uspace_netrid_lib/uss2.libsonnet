@@ -16,13 +16,13 @@
     // (optional) Means by which to interact with the participant as a service provider
     service_provider: {
       participant_id: 'uss2',
-      injection_base_url: 'http://host.docker.internal:8088/ridsp/injection',
+      injection_base_url: 'https://harness.staging.uspacekeeper.com/ridsp/injection',
     },
 
     // (optional) Means by which to interact with the participant as a display provider
     observer: {
       participant_id: 'uss2',
-      observation_base_url: 'http://host.docker.internal:8088/riddp/observation',
+      observation_base_url: 'https://harness.staging.uspacekeeper.com/riddp/observation',
     },
 
     // (optional) List of DSS instances hosted by this participant
@@ -37,10 +37,7 @@
         ],
         // (optional) List of datastore nodes of this DSS instance
         datastore_nodes: [
-          {
-            host: 'ybdb.uss2.localutm',
-            port: 5433,
-          },
+          { host: 'ybdb.dss.uspacekeeper.com', port: 5433 },
         ],
       },
     ],

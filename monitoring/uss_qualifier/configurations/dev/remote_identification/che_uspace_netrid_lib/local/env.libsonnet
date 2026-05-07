@@ -100,7 +100,7 @@ function(participants) {
             astm_url_regexes: ['https://mock\\.dss\\.uspacekeeper\\.com.*'],
           },
           uss2: {
-            astm_url_regexes: ['http://host\\.docker\\.internal.*'],
+            astm_url_regexes: ['https://mock\\.dss\\.uspacekeeper\\.com.*'],
           },
           uss3: {
             astm_url_regexes: ['https://mock\\.dss\\.uspacekeeper\\.com.*'],

@@ -16,14 +16,14 @@
     // (optional) Means by which to interact with the participant as a flight planner
     flight_planner: {
       participant_id: 'uss2_core',
-      v1_base_url: 'http://host.docker.internal:8087/flight_planning/v1',
+      v1_base_url: 'https://harness.staging.uspacekeeper.com/flight_planning/v1',
     },
 
     // (optional) Means by which to obtain this participant's software version in the test environment
     test_env_version_provider: {
       participant_id: 'uss2_core',
       interuss: {
-        base_url: 'http://host.docker.internal:8087/versioning',
+        base_url: 'https://harness.staging.uspacekeeper.com/versioning',
       },
     },
 
@@ -31,7 +31,7 @@
     prod_env_version_provider: {
       participant_id: 'uss2_core',
       interuss: {
-        base_url: 'http://host.docker.internal:8087/versioning',
+        base_url: 'https://harness.staging.uspacekeeper.com/versioning',
       },
     },
 
@@ -43,10 +43,7 @@
         supports_ovn_request: true,
         // (optional) List of datastore nodes of this DSS instance
         datastore_nodes: [
-          {
-            host: 'ybdb.uss2.localutm',
-            port: 5433,
-          },
+          { host: 'ybdb.dss.uspacekeeper.com', port: 5433 },
         ],
       },
     ]
