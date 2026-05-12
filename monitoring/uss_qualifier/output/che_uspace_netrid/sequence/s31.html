@@ -153,7 +153,7 @@
             <td><a href="#e2">2</a></td>
             <td>&#x1F4D3;</td>
             <td colspan="3">
-              <code>nb_queries</code>: 2117
+              <code>nb_queries</code>: 3232
             </td>
           </tr>
           <tr id="e3">
@@ -201,25 +201,35 @@
             </tr>
             <tr id="e16">
               <td><a href="#e16">16</a></td>
-                <td>&#x2705;</td>
-                <td class="pass_result">
-                  Performance of /display_data subsequent requests
+                <td>    &#9888;&#65039;
+</td>
+                <td class="    fail_result
+">
+                    <a href="https://github.com/interuss/monitoring/blob/c37d97c8e466301702e5d6e7746e9fef3ae7d039/monitoring/uss_qualifier/scenarios/astm/netrid/v22a/aggregate_checks.md#performance-of-/display_data-subsequent-requests-check">Performance of /display_data subsequent requests</a>
+                    <br>
+                    <span class="failed_check_summary">95th percentile of durations for subsequent DP display_data queries is higher than threshold</span>
+                    <br>
+                    <span class="failed_check_details">threshold: 1, 95th percentile: 2.57</span>
                 </td>
-                    <td class="pass_result">&#x2705;</td>
+                    <td class="    fail_result
+">
+                          &#9888;&#65039;
+
+                    </td>
                     <td></td>
             </tr>
             <tr id="e17">
               <td><a href="#e17">17</a></td>
                 <td>&#x1F4D3;</td>
                 <td colspan="3">
-                  <code>uss1/display_data</code>: percentiles on 7 relevant queries (6 different URLs, 6 initial queries, 1 subsequent queries): init 95th: 1.37; init 99th: 1.41; subsequent 95th: 0.5; subsequent 99th: 0.5
+                  <code>uss1/display_data</code>: percentiles on 16 relevant queries (15 different URLs, 15 initial queries, 1 subsequent queries): init 95th: 1.88; init 99th: 1.96; subsequent 95th: 2.57; subsequent 99th: 2.57
                 </td>
             </tr>
             <tr id="e18">
               <td><a href="#e18">18</a></td>
                 <td>&#x1F4D3;</td>
                 <td colspan="3">
-                  <code>uss1/display_data details</code>: Initial durations: [0.639488, 0.768886, 1.283891, 0.612463, 1.145966, 0.796485] subsequent durations: [0.500319]
+                  <code>uss1/display_data details</code>: Initial durations: [0.470907, 0.89926, 1.735886, 0.78097, 1.858208, 1.19778, 0.938612, 0.713814, 0.749025, 0.78233, 0.717277, 0.691313, 0.736009, 0.529401, 0.714173] subsequent durations: [2.56525]
                 </td>
             </tr>
             <tr id="e19">
@@ -244,14 +254,14 @@
               <td><a href="#e21">21</a></td>
                 <td>&#x1F4D3;</td>
                 <td colspan="3">
-                  <code>uss2/display_data</code>: percentiles on 7 relevant queries (6 different URLs, 7 initial queries, 0 subsequent queries): init 95th: 0.484; init 99th: 0.498; subsequent 95th: 0; subsequent 99th: 0
+                  <code>uss2/display_data</code>: percentiles on 16 relevant queries (15 different URLs, 16 initial queries, 0 subsequent queries): init 95th: 1.29; init 99th: 1.35; subsequent 95th: 0; subsequent 99th: 0
                 </td>
             </tr>
             <tr id="e22">
               <td><a href="#e22">22</a></td>
                 <td>&#x1F4D3;</td>
                 <td colspan="3">
-                  <code>uss2/display_data details</code>: Initial durations: [0.155259, 0.029942, 0.270436, 0.119964, 0.283559, 0.457522, 0.413298] subsequent durations: []
+                  <code>uss2/display_data details</code>: Initial durations: [0.30772, 0.037773, 1.271536, 1.173403, 1.024767, 1.158572, 0.365099, 0.275563, 0.339652, 1.008852, 0.232188, 0.075423, 0.370131, 0.326, 0.085596, 0.458207] subsequent durations: []
                 </td>
             </tr>
             <tr id="e23">
@@ -335,11 +345,21 @@
                     <a href="https://github.com/interuss/monitoring/blob/c37d97c8e466301702e5d6e7746e9fef3ae7d039/monitoring/uss_qualifier/scenarios/astm/netrid/v22a/aggregate_checks.md#performance-of-/flights?view-requests-test-step">Performance of /flights?view requests</a>
                 </span></td>
               <td><a href="#e45">45</a></td>
-                <td>&#x2705;</td>
-                <td class="pass_result">
-                  95th percentile response time
+                <td>    &#9888;&#65039;
+</td>
+                <td class="    fail_result
+">
+                    <a href="https://github.com/interuss/monitoring/blob/c37d97c8e466301702e5d6e7746e9fef3ae7d039/monitoring/uss_qualifier/scenarios/astm/netrid/v22a/aggregate_checks.md#95th-percentile-response-time-check">95th percentile response time</a>
+                    <br>
+                    <span class="failed_check_summary">95th percentile of /flights?view requests is 1.14 s</span>
+                    <br>
+                    <span class="failed_check_details">expected less than 1 s, was 1.14</span>
                 </td>
-                    <td class="pass_result">&#x2705;</td>
+                    <td class="    fail_result
+">
+                          &#9888;&#65039;
+
+                    </td>
                     <td></td>
             </tr>
             <tr id="e46">
@@ -355,7 +375,7 @@
               <td><a href="#e47">47</a></td>
                 <td>&#x1F4D3;</td>
                 <td colspan="3">
-                  <code>uss1/flights</code>: percentiles on 42 relevant queries: 95th: 0.564; 99th: 1.55
+                  <code>uss1/flights</code>: percentiles on 127 relevant queries: 95th: 1.14; 99th: 1.93
                 </td>
             </tr>
             <tr id="e48">
@@ -412,6 +432,26 @@
                 <td colspan="3">
                   <code>unattributed-queries</code>: Found unattributed queries:
   * POST https://staging.uspacekeeper.com/api/uss/identification_service_areas/00000190-e36d-40be-8d38-beca6ca30000
+  * POST https://staging.uspacekeeper.com/api/uss/identification_service_areas/0000015c-e36d-40be-8d38-beca6ca30000
+  * POST https://staging.uspacekeeper.com/api/uss/identification_service_areas/0000015c-e36d-40be-8d38-beca6ca30000
+  * POST https://staging.uspacekeeper.com/api/uss/identification_service_areas/0000015c-e36d-40be-8d38-beca6ca30000
+  * POST https://staging.uspacekeeper.com/api/uss/identification_service_areas/00000171-e36d-40be-8d38-beca6ca30000
+  * POST https://staging.uspacekeeper.com/api/uss/identification_service_areas/00000171-e36d-40be-8d38-beca6ca30000
+  * POST https://staging.uspacekeeper.com/api/uss/identification_service_areas/00000172-e36d-40be-8d38-beca6ca30000
+  * POST https://staging.uspacekeeper.com/api/uss/identification_service_areas/00000172-e36d-40be-8d38-beca6ca30000
+  * POST https://staging.uspacekeeper.com/api/uss/identification_service_areas/00000172-e36d-40be-8d38-beca6ca30000
+  * POST https://staging.uspacekeeper.com/api/uss/identification_service_areas/00000172-e36d-40be-8d38-beca6ca30000
+  * POST https://staging.uspacekeeper.com/api/uss/identification_service_areas/00000172-e36d-40be-8d38-beca6ca30000
+  * POST https://staging.uspacekeeper.com/api/uss/identification_service_areas/00000172-e36d-40be-8d38-beca6ca30000
+  * POST https://staging.uspacekeeper.com/api/uss/identification_service_areas/34aed24b-b262-48e7-844c-849cf50a02f2
+  * POST https://staging.uspacekeeper.com/api/uss/identification_service_areas/34aed24b-b262-48e7-844c-849cf50a02f2
+  * POST https://staging.uspacekeeper.com/api/uss/identification_service_areas/34aed24b-b262-48e7-844c-849cf50a02f2
+  * POST https://staging.uspacekeeper.com/api/uss/identification_service_areas/e2b769ff-a393-40da-a5f6-85424cb60cff
+  * POST https://staging.uspacekeeper.com/api/uss/identification_service_areas/e2b769ff-a393-40da-a5f6-85424cb60cff
+  * POST https://staging.uspacekeeper.com/api/uss/identification_service_areas/d57b1906-7c15-40ea-89db-6161960d8533
+  * POST https://staging.uspacekeeper.com/api/uss/identification_service_areas/d57b1906-7c15-40ea-89db-6161960d8533
+  * POST https://staging.uspacekeeper.com/api/uss/identification_service_areas/0000015c-e36d-40be-8d38-beca6ca30000
+  * POST https://staging.uspacekeeper.com/api/uss/identification_service_areas/0000015c-e36d-40be-8d38-beca6ca30000
                 </td>
             </tr>
   </table>
